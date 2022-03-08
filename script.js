@@ -63,12 +63,34 @@ const modal = document.querySelector('#modal');
 const modalContent = document.querySelector('#modal-content');
 const modalHeader = document.querySelector('.modal-header');
 const modalText = document.querySelector('.modal-text');
-const btnCloseModal = document.querySelector('.btn-close-modal');
+
+// -----buttons----
+const btnRules = document.querySelector('.btn-rules');
+const btnStartGame = document.querySelector('.btn-start-game');
+const btnResetGame = document.querySelector('.btn-reset-game');
+
+// ----UI-------
+// const player1Username = document.getElementsByClassName('input-username')[0];
+// console.log(player1Username.value);
+// const player2Username
+
+// const player1Color
+// const player2Color
+
+// const activePlayer
+
+const Player1Wins = 0;
+const Player2Wins = 0;
 
 // ====================
 // ======Functions====
 // ====================
 
-// gameInit();
+btnStartGame.addEventListener('click', gameInit);
 
-function gameInit() {}
+function gameInit() {
+  modal.classList.remove('visible');
+  modal.classList.add('hidden');
+
+  // needs to generate grid based on player choices as well
+}
