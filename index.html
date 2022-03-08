@@ -11,6 +11,30 @@
   <body>
     <h1>Connect 4</h1>
     <main>
+      <section id="modal" class="">
+        <div id="modal-content">
+          <h2 class="modal-header"></h2>
+          <div id="player-settings-container">
+            <div id="player-one-settings" class="player-input">
+              <p>Player 1:</p>
+              <form action="">
+                <input type="text" placeholder="Input Username" />
+                <input type="color" value="#FFFF00" />
+              </form>
+            </div>
+            <div id="player-two-settings" class="player-input">
+              <p>Player 2:</p>
+              <form action="">
+                <input type="text" placeholder="Input Username" />
+                <input type="color" value="#ff0000" />
+              </form>
+            </div>
+          </div>
+          </div>
+          <p class="modal-text">modal text content</p>
+          <button class="btn-close-modal">Close</button>
+        </div>
+      </section>
       <section id="info-bar">
         <div>Current Turn:<span>///</span></div>
         <div id="score-container">
@@ -19,6 +43,9 @@
         </div>
         <button id="btn-how-to-play">How to Play</button>
         <button id="btn-reset-game">Reset Game</button>
+      </section>
+      <section id="grid-container">
+        <!-- grid goes here -->
       </section>
     </main>
   </body>

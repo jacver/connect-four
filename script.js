@@ -53,3 +53,22 @@ On gameOver
         > modal has "change grid button"
     > update player record
 */
+
+// ========================
+// =========Selectors======
+// ========================
+
+// ----modal----
+const modal = document.querySelector('#modal');
+const modalContent = document.querySelector('#modal-content');
+const modalHeader = document.querySelector('.modal-header');
+const modalText = document.querySelector('.modal-text');
+const btnCloseModal = document.querySelector('.btn-close-modal');
+
+// ====================
+// ======Functions====
+// ====================
+
+// gameInit();
+
+function gameInit() {}
