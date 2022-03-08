@@ -1,0 +1,11 @@
+span {
+  /* SPAN indicates need for dynamic addition */
+  background-color: red;
+}
+
+#info-bar {
+  display: flex;
+  justify-content: space-between;
+  background-color: bisque;
+  padding: 0.5rem;
+}
