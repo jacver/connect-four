@@ -69,6 +69,7 @@ button:hover {
 }
 
 #info-bar {
+  min-width: 80vw;
   display: flex;
   justify-content: space-between;
   background-color: bisque;
@@ -78,16 +79,17 @@ button:hover {
 #grid-container {
   background-color: blue;
   min-width: 80vw;
-  height: 50vh;
+  min-height: 50vh;
   padding: 0.5rem;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
+  flex-direction: column;
 }
 
 .cell {
-  min-width: 3rem;
-  min-height: 3rem;
+  min-width: 2rem;
+  min-height: 2rem;
   margin: 0.25rem;
   border-radius: 50%;
   background-color: white;

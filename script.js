@@ -79,6 +79,8 @@ let gameInfo = {
   gameWon: false,
   gridRows: 6,
   gridColumns: 7,
+  //TODO: add a "start" game button to init modal that will run with a 6x7 grid default
+  winningCombo: [],
 };
 
 // ========================
@@ -127,6 +129,7 @@ document.querySelector('.btn-player1').onclick = function () {
 // ==========================================
 // ======Getting PLayer 2 Input==============
 // ==========================================
+
 document.querySelector('.btn-player2').onclick = function () {
   // pull username and color values from landing page modal
   let username = document.querySelector('.input-username2').value;
@@ -148,7 +151,7 @@ document.querySelector('.btn-player2').onclick = function () {
 };
 
 // ==========================================
-// ======Creating Grid=======================
+// ======Creating gameboard==================
 // ==========================================
 
 btnsGetGrid.forEach((btn) =>
@@ -172,19 +175,50 @@ btnsGetGrid.forEach((btn) =>
       let columnX = document.querySelector('.column' + (i + 1));
 
       for (let j = 0; j < columns; j++) {
-        let cell = document.createElement('div');
+        let cell = document.createElement('button');
         cell.classList.add('cell');
         columnX.appendChild(cell);
       }
     }
+
+    // TODO: generate winningCombos - must dynamically represent selected grid size.I believe this should be inside of the game init function and then pushed into empty array in global vars. This allows the winning condition to exist for each new grid. Then be checked in the turn() function that will manage game progression.
+
+    // check tic tac toe and documentation here for mapping: https://stackoverflow.com/questions/50114294/create-a-grid-array-in-javascript
+
+    // function createWinningCombo(numColumns, numRows) {
+    //   const map = [];
+    //   for (let x = 0; x < numColumns; x++) {
+    //     map[x] = [];
+    //     // console.log(k); // returns rows
+    //     for (let y = 0; y < numRows; y++) {
+    //       function addCell(map, x, y) {
+    //         map[x][y];
+    //       }
+    //     }
+    //   }
+    //   console.log(map);
+    //   return map;
+    // }
+    // createWinningCombo(rowsColsArr[0], rowsColsArr[1]);
+
     // hide the modal so player can access grid
     gameInit();
   })
 );
 
-// ====================
-// ======Functions====
-// ====================
+// TODO: I cannot querySelect the cells outside of the initialization function. I wante a turn function to run off of event listener on each button (forEach on Cells). However, I want this seperate from init function so i need to find a way to pull cells into that function. Maybe create an empty array of cells then push the newly created cells into it?
+
+// function turn() {
+//   // alternate players based on turn # (even or odd)
+//   turn % 2 === 0 ? (activePlayer = 1) : (activePlayer = 2);
+//   // display active player on info bar
+//   let displayActivePlayer = document.querySelector('.active-player');
+//   activeplayer === 1
+//     ? (displayActivePlayer.innerText = displayUsername1)
+//     : (displayActivePlayer.innerText = displayUsername2);
+// }
+
+// //
 
 function gameInit() {
   modal.classList.remove('visible');
