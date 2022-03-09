@@ -79,4 +79,17 @@ button:hover {
   background-color: blue;
   min-height: 70vh;
   min-width: 80vw;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.cell {
+  min-width: 3rem;
+  min-height: 3rem;
+  margin: 0.25rem;
+  border-radius: 50%;
+  background-color: white;
+  border: 3px black solid;
 }

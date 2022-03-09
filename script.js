@@ -154,6 +154,22 @@ btnsGetGrid.forEach((btn) =>
     columns = rowsColsArr[1];
     // console.log(rows);
     // console.log(columns);
+
+    // generate the grid using the rows and columns taken from the button
+    for (let i = 0; i < rows; i++) {
+      //   console.log(i + 1);
+      let row = document.createElement("div");
+      row.classList.add("row" + (i + 1));
+      gridContainer.appendChild(row);
+
+      let rowX = document.querySelector(".row" + (i + 1));
+
+      for (let j = 0; j < columns; j++) {
+        let cell = document.createElement("div");
+        cell.classList.add("cell");
+        rowX.appendChild(cell);
+      }
+    }
   })
 );
 
