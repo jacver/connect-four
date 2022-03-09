@@ -61,15 +61,15 @@ On gameOver
 let playerInfo = [
   {
     player: 1,
-    username: "Player 1",
-    color: "#FFFF00",
+    username: 'Player 1',
+    color: '#FFFF00',
     wins: 0,
     active: true,
   },
   {
     player: 2,
-    username: "Player 2",
-    color: "#ff0000",
+    username: 'Player 2',
+    color: '#ff0000',
     wins: 0,
     active: false,
   },
@@ -86,29 +86,29 @@ let gameInfo = {
 // ========================
 
 // ----modal----
-const modal = document.querySelector("#modal");
-const modalContent = document.querySelector("#modal-content");
-const modalHeader = document.querySelector(".modal-header");
-const modalText = document.querySelector(".modal-text");
+const modal = document.querySelector('#modal');
+const modalContent = document.querySelector('#modal-content');
+const modalHeader = document.querySelector('.modal-header');
+const modalText = document.querySelector('.modal-text');
 
 // -----buttons----
-const btnsGetGrid = document.querySelectorAll(".btn-grid-choice"); // NODE LIST
-const btnRules = document.querySelector(".btn-rules");
-const btnStartGame = document.querySelector(".btn-start-game");
-const btnResetGame = document.querySelector(".btn-reset-game");
+const btnsGetGrid = document.querySelectorAll('.btn-grid-choice'); // NODE LIST
+const btnRules = document.querySelector('.btn-rules');
+const btnStartGame = document.querySelector('.btn-start-game');
+const btnResetGame = document.querySelector('.btn-reset-game');
 
 // ----Game Board------
-const gridContainer = document.querySelector("#grid-container");
+const gridContainer = document.querySelector('#grid-container');
 
 // ==========================================
 // ======Getting PLayer 1 Input==============
 // ==========================================
 
 // Getting username and color choice for player 1
-document.querySelector(".btn-player1").onclick = function () {
+document.querySelector('.btn-player1').onclick = function () {
   // pull username and color values from landing page modal
-  let username = document.querySelector(".input-username1").value;
-  let color = document.querySelector(".color-player1").value;
+  let username = document.querySelector('.input-username1').value;
+  let color = document.querySelector('.color-player1').value;
 
   // if no username is input, default of Player 1 will remain, otherwise update object
   if (username) {
@@ -121,16 +121,16 @@ document.querySelector(".btn-player1").onclick = function () {
   //   console.log(playerInfo[0]);
 
   // display updated name on gameboard
-  let displayUsername1 = document.querySelector(".display-username1");
+  let displayUsername1 = document.querySelector('.display-username1');
   displayUsername1.innerText = playerInfo[0].username;
 };
 // ==========================================
 // ======Getting PLayer 2 Input==============
 // ==========================================
-document.querySelector(".btn-player2").onclick = function () {
+document.querySelector('.btn-player2').onclick = function () {
   // pull username and color values from landing page modal
-  let username = document.querySelector(".input-username2").value;
-  let color = document.querySelector(".color-player2").value;
+  let username = document.querySelector('.input-username2').value;
+  let color = document.querySelector('.color-player2').value;
 
   // if no username is input, default of Player 2 will remain, otherwise update object
   if (username) {
@@ -143,7 +143,7 @@ document.querySelector(".btn-player2").onclick = function () {
   //   console.log(playerInfo[1]);
 
   // display updated name on gameboard
-  let displayUsername2 = document.querySelector(".display-username2");
+  let displayUsername2 = document.querySelector('.display-username2');
   displayUsername2.innerText = playerInfo[1].username;
 };
 
@@ -152,29 +152,29 @@ document.querySelector(".btn-player2").onclick = function () {
 // ==========================================
 
 btnsGetGrid.forEach((btn) =>
-  btn.addEventListener("click", function () {
+  btn.addEventListener('click', function () {
     let rows, columns;
     // break up the button text into rows and columns
-    let rowsColsArr = this.innerText.split("x");
+    let rowsColsArr = this.innerText.split('x');
     // assign rows and columns based on new array
-    rows = rowsColsArr[0];
-    columns = rowsColsArr[1];
+    rows = rowsColsArr[1];
+    columns = rowsColsArr[0];
     // console.log(rows);
     // console.log(columns);
 
     // generate the grid using the rows and columns taken from the button
     for (let i = 0; i < rows; i++) {
       //   console.log(i + 1);
-      let row = document.createElement("div");
-      row.classList.add("row" + (i + 1));
-      gridContainer.appendChild(row);
+      let column = document.createElement('div');
+      column.classList.add('column' + (i + 1));
+      gridContainer.appendChild(column);
 
-      let rowX = document.querySelector(".row" + (i + 1));
+      let columnX = document.querySelector('.column' + (i + 1));
 
       for (let j = 0; j < columns; j++) {
-        let cell = document.createElement("div");
-        cell.classList.add("cell");
-        rowX.appendChild(cell);
+        let cell = document.createElement('div');
+        cell.classList.add('cell');
+        columnX.appendChild(cell);
       }
     }
     // hide the modal so player can access grid
@@ -187,6 +187,6 @@ btnsGetGrid.forEach((btn) =>
 // ====================
 
 function gameInit() {
-  modal.classList.remove("visible");
-  modal.classList.add("hidden");
+  modal.classList.remove('visible');
+  modal.classList.add('hidden');
 }
