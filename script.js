@@ -3,19 +3,19 @@
 =============
 on page load:
 =============
-    > a modal will open
-        > modal will let player 1 pick a username
-        > modal will let player 1 pick a team color
-        > modal will let player 2 pick a username
-        > modal will let player 2 pick a team color
+    [x] a modal will open
+        [x] modal will let player 1 pick a username
+        [x] modal will let player 1 pick a team color
+        [x] modal will let player 2 pick a username
+        [x] modal will let player 2 pick a team color
 
-        > modal will allow player to select grid size with buttons
-            > game will run at 6x7 by default
-            > 5x4 grid button
-            > 6x5 grid button
-            > 8x7 grid button
-            > 9x7 grid button
-            > 10x7 grid button
+        [x] modal will allow player to select grid size with buttons
+            [x] game will run at 6x7 by default
+            [x] 5x4 grid button
+            [x] 6x5 grid button
+            [x] 8x7 grid button
+            [x] 9x7 grid button
+            [x] 10x7 grid button
 
         > Player can read rules from modal via a button 
         > player can start game via a button
@@ -34,8 +34,8 @@ On gameInit
             > will open modal with rules
         > reset game button
     
-    > gameboard 
-        > Generated DYNAMICALLY using grid 
+    [x] gameboard 
+        [x] Generated DYNAMICALLY using grid 
 
     > on a players turn the following will happen:
         > implement a way to indicate which column is hovered over
@@ -100,6 +100,10 @@ const btnResetGame = document.querySelector(".btn-reset-game");
 // ----Game Board------
 const gridContainer = document.querySelector("#grid-container");
 
+// ==========================================
+// ======Getting PLayer 1 Input==============
+// ==========================================
+
 // Getting username and color choice for player 1
 document.querySelector(".btn-player1").onclick = function () {
   // pull username and color values from landing page modal
@@ -120,8 +124,9 @@ document.querySelector(".btn-player1").onclick = function () {
   let displayUsername1 = document.querySelector(".display-username1");
   displayUsername1.innerText = playerInfo[0].username;
 };
-
-// Getting username and color choice for player 2
+// ==========================================
+// ======Getting PLayer 2 Input==============
+// ==========================================
 document.querySelector(".btn-player2").onclick = function () {
   // pull username and color values from landing page modal
   let username = document.querySelector(".input-username2").value;
@@ -142,7 +147,9 @@ document.querySelector(".btn-player2").onclick = function () {
   displayUsername2.innerText = playerInfo[1].username;
 };
 
-// getting grid
+// ==========================================
+// ======Creating Grid=======================
+// ==========================================
 
 btnsGetGrid.forEach((btn) =>
   btn.addEventListener("click", function () {
