@@ -92,11 +92,13 @@ const modalHeader = document.querySelector(".modal-header");
 const modalText = document.querySelector(".modal-text");
 
 // -----buttons----
+const btnsGetGrid = document.querySelectorAll(".btn-grid-choice"); // NODE LIST
 const btnRules = document.querySelector(".btn-rules");
 const btnStartGame = document.querySelector(".btn-start-game");
 const btnResetGame = document.querySelector(".btn-reset-game");
 
-// ----UI-------
+// ----Game Board------
+const gridContainer = document.querySelector("#grid-container");
 
 // Getting username and color choice for player 1
 document.querySelector(".btn-player1").onclick = function () {
@@ -113,6 +115,10 @@ document.querySelector(".btn-player1").onclick = function () {
     playerInfo[0].color = color;
   }
   //   console.log(playerInfo[0]);
+
+  // display updated name on gameboard
+  let displayUsername1 = document.querySelector(".display-username1");
+  displayUsername1.innerText = playerInfo[0].username;
 };
 
 // Getting username and color choice for player 2
@@ -130,7 +136,26 @@ document.querySelector(".btn-player2").onclick = function () {
     playerInfo[1].color = color;
   }
   //   console.log(playerInfo[1]);
+
+  // display updated name on gameboard
+  let displayUsername2 = document.querySelector(".display-username2");
+  displayUsername2.innerText = playerInfo[1].username;
 };
+
+// getting grid
+
+btnsGetGrid.forEach((btn) =>
+  btn.addEventListener("click", function () {
+    let rows, columns;
+    // break up the button text into rows and columns
+    let rowsColsArr = this.innerText.split("x");
+    // assign rows and columns based on new array
+    rows = rowsColsArr[0];
+    columns = rowsColsArr[1];
+    // console.log(rows);
+    // console.log(columns);
+  })
+);
 
 // ====================
 // ======Functions====
