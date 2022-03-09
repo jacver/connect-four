@@ -54,43 +54,93 @@ On gameOver
     > update player record
 */
 
+// =================
+// ===global vars===
+// =================
+
+let playerInfo = [
+  {
+    player: 1,
+    username: "Player 1",
+    color: "#FFFF00",
+    wins: 0,
+    active: true,
+  },
+  {
+    player: 2,
+    username: "Player 2",
+    color: "#ff0000",
+    wins: 0,
+    active: false,
+  },
+];
+
+let gameInfo = {
+  gameWon: false,
+  gridRows: 6,
+  gridColumns: 7,
+};
+
 // ========================
 // =========Selectors======
 // ========================
 
 // ----modal----
-const modal = document.querySelector('#modal');
-const modalContent = document.querySelector('#modal-content');
-const modalHeader = document.querySelector('.modal-header');
-const modalText = document.querySelector('.modal-text');
+const modal = document.querySelector("#modal");
+const modalContent = document.querySelector("#modal-content");
+const modalHeader = document.querySelector(".modal-header");
+const modalText = document.querySelector(".modal-text");
 
 // -----buttons----
-const btnRules = document.querySelector('.btn-rules');
-const btnStartGame = document.querySelector('.btn-start-game');
-const btnResetGame = document.querySelector('.btn-reset-game');
+const btnRules = document.querySelector(".btn-rules");
+const btnStartGame = document.querySelector(".btn-start-game");
+const btnResetGame = document.querySelector(".btn-reset-game");
 
 // ----UI-------
-// const player1Username = document.getElementsByClassName('input-username')[0];
-// console.log(player1Username.value);
-// const player2Username
 
-// const player1Color
-// const player2Color
+// Getting username and color choice for player 1
+document.querySelector(".btn-player1").onclick = function () {
+  // pull username and color values from landing page modal
+  let username = document.querySelector(".input-username1").value;
+  let color = document.querySelector(".color-player1").value;
 
-// const activePlayer
+  // if no username is input, default of Player 1 will remain, otherwise update object
+  if (username) {
+    playerInfo[0].username = username;
+  }
+  // if the user changes the color from default yellow, update object
+  if (color !== playerInfo[0].color) {
+    playerInfo[0].color = color;
+  }
+  //   console.log(playerInfo[0]);
+};
 
-const Player1Wins = 0;
-const Player2Wins = 0;
+// Getting username and color choice for player 2
+document.querySelector(".btn-player2").onclick = function () {
+  // pull username and color values from landing page modal
+  let username = document.querySelector(".input-username2").value;
+  let color = document.querySelector(".color-player2").value;
+
+  // if no username is input, default of Player 2 will remain, otherwise update object
+  if (username) {
+    playerInfo[1].username = username;
+  }
+  // if the user changes the color from default yellow, update object
+  if (color !== playerInfo[1].color) {
+    playerInfo[1].color = color;
+  }
+  //   console.log(playerInfo[1]);
+};
 
 // ====================
 // ======Functions====
 // ====================
 
-btnStartGame.addEventListener('click', gameInit);
+btnStartGame.addEventListener("click", gameInit);
 
 function gameInit() {
-  modal.classList.remove('visible');
-  modal.classList.add('hidden');
+  modal.classList.remove("visible");
+  modal.classList.add("hidden");
 
   // needs to generate grid based on player choices as well
 }

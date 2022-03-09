@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Connect Four</title>
-    <script src="script.js" defer></script>
+
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -16,28 +16,29 @@
           <h2 class="modal-header"></h2>
           <div id="player-settings-container">
             <div id="player-one-settings" class="player-input">
-              <h2>Player 1:</h2>
               <form action="">
+                <label>Player 1:</label>
                 <input
-                  class="input-username"
+                  class="input-username1"
                   value=""
                   type="text"
                   placeholder="Input Username"
                 />
-                <input type="button" value="submit" />
-                <input type="color" value="#FFFF00" />
+                <input class="color-player1" type="color" value="#FFFF00" />
+                <input class="btn-player1" type="button" value="Submit" />
               </form>
             </div>
             <div id="player-two-settings" class="player-input">
-              <h2>Player 2:</h2>
               <form action="">
+                <label>Player 2:</label>
                 <input
-                  class="input-username"
+                  class="input-username2"
                   value=""
                   type="text"
                   placeholder="Input Username"
                 />
-                <input type="color" value="#ff0000" />
+                <input class="color-player2" type="color" value="#ff0000" />
+                <input class="btn-player2" type="button" value="Submit" />
               </form>
             </div>
           </div>
@@ -75,5 +76,6 @@
         <!-- grid goes here -->
       </section>
     </main>
+    <script src="script.js"></script>
   </body>
 </html>
