@@ -77,12 +77,11 @@ button:hover {
 
 #grid-container {
   background-color: blue;
-  min-height: 70vh;
   min-width: 80vw;
   padding: 0.5rem;
   display: flex;
   justify-content: center;
-  align-items: baseline;
+  align-items: flex-end;
 }
 
 .cell {

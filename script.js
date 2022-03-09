@@ -170,6 +170,8 @@ btnsGetGrid.forEach((btn) =>
         rowX.appendChild(cell);
       }
     }
+    // hide the modal so player can access grid
+    gameInit();
   })
 );
 
@@ -177,11 +179,7 @@ btnsGetGrid.forEach((btn) =>
 // ======Functions====
 // ====================
 
-btnStartGame.addEventListener("click", gameInit);
-
 function gameInit() {
   modal.classList.remove("visible");
   modal.classList.add("hidden");
-
-  // needs to generate grid based on player choices as well
 }
