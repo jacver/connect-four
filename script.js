@@ -75,15 +75,6 @@ let playerInfo = [
   },
 ];
 
-let gameInfo = {
-  gameWon: false,
-  gridRows: 6,
-  gridColumns: 7,
-  //TODO: add a "start" game button to init modal that will run with a 6x7 grid default
-  gameBoardArr: [],
-  winningCombo: [],
-};
-
 // ========================
 // =========Selectors======
 // ========================
@@ -155,91 +146,76 @@ document.querySelector(".btn-player2").onclick = function () {
 // ======Creating gameboard==================
 // ==========================================
 
-btnsGetGrid.forEach((btn) =>
-  btn.addEventListener("click", function () {
-    let rows, columns;
-    // break up the button text into rows and columns
-    let rowsColsArr = this.innerText.split("x");
-    // assign rows and columns based on new array
-    rows = rowsColsArr[0];
-    columns = rowsColsArr[1];
-    // console.log(rows);
-    // console.log(columns);
+btnsGetGrid.forEach((btn) => btn.addEventListener("click", init));
 
-    let boardArr = [];
+function init() {
+  // set default active player
+  const displayActivePlayer = document.querySelector(".active-player");
+  displayActivePlayer.innerText = playerInfo[0].username;
 
-    // generate the grid using the rows and columns taken from the button
-    for (let i = 0; i < rows; i++) {
-      //   console.log(i + 1);
-      let column = document.createElement("div");
-      column.classList.add("column" + (i + 1));
-      gridContainer.appendChild(column);
-      // blank 2d array
-      let rowArr = [];
+  // get gameboard
+  let rows, columns;
+  // break up the button text into rows and columns
+  let rowsColsArr = this.innerText.split("x");
+  // assign rows and columns based on new array
+  rows = rowsColsArr[0];
+  columns = rowsColsArr[1];
 
-      let columnX = document.querySelector(".column" + (i + 1));
+  let boardArr = [];
 
-      for (let j = 0; j < columns; j++) {
-        let cell = document.createElement("button");
-        cell.classList.add("cell");
-        columnX.appendChild(cell);
-        rowArr.push(j);
-      }
+  // generate the grid using the rows and columns taken from the button
+  for (let i = 0; i < rows; i++) {
+    let row = document.createElement("div");
+    row.classList.add("row" + (i + 1));
+    gridContainer.appendChild(row);
+    // blank 2d array
+    let rowArr = [];
 
-      boardArr.push(rowArr);
+    let rowX = document.querySelector(".row" + (i + 1));
+
+    for (let j = 0; j < columns; j++) {
+      let cell = document.createElement("button");
+      cell.classList.add("cell");
+      rowX.appendChild(cell);
+      rowArr.push(j);
     }
 
-    console.log(boardArr);
+    boardArr.push(rowArr);
+  }
 
-    // TODO: generate winningCombos - must dynamically represent selected grid size.I believe this should be inside of the game init function and then pushed into empty array in global vars. This allows the winning condition to exist for each new grid. Then be checked in the turn() function that will manage game progression.
-
-    // check tic tac toe and documentation here for mapping: https://stackoverflow.com/questions/50114294/create-a-grid-array-in-javascript
-
-    // function createWinningCombo(numColumns, numRows) {
-    //   const map = [];
-    //   for (let x = 0; x < numColumns; x++) {
-    //     map[x] = [];
-    //     // console.log(k); // returns rows
-    //     for (let y = 0; y < numRows; y++) {
-    //       function addCell(map, x, y) {
-    //         map[x][y];
-    //       }
-    //     }
-    //   }
-    //   console.log(map);
-    //   return map;
-    // }
-    // createWinningCombo(rowsColsArr[0], rowsColsArr[1]);
-
-    // hide the modal so player can access grid
-    gameInit();
-  })
-);
-
-// TODO: I cannot querySelect the cells outside of the initialization function. I wante a turn function to run off of event listener on each button (forEach on Cells). However, I want this seperate from init function so i need to find a way to pull cells into that function. Maybe create an empty array of cells then push the newly created cells into it?
-
-// TODO: tracking mechanism: one large array
-
-// [[row 1], [ row 2 ], [row 3 ], [row 4 ]]; // each row filled with X empty strings to align w/ column num
-
-// games to compare: minesweeper, checkers,
-
-// step 1: maniuplate starting array dynamically
-//
-
-// function turn() {
-//   // alternate players based on turn # (even or odd)
-//   turn % 2 === 0 ? (activePlayer = 1) : (activePlayer = 2);
-//   // display active player on info bar
-//   let displayActivePlayer = document.querySelector('.active-player');
-//   activeplayer === 1
-//     ? (displayActivePlayer.innerText = displayUsername1)
-//     : (displayActivePlayer.innerText = displayUsername2);
-// }
-
-// //
-
-function gameInit() {
+  // hide the modal so player can access game
   modal.classList.remove("visible");
   modal.classList.add("hidden");
+
+  // add event listener to cells (slots in the game board)
+  const cells = document.querySelectorAll(".cell");
+
+  // set starting turn counter
+  let turnCount = 1;
+
+  cells.forEach((cell) => cell.addEventListener("click", turn));
+
+  // turn functionality for game progression
+  function turn() {
+    // determine active player
+    let activePlayer = 1;
+    turnCount % 2 === 0 ? (activePlayer = 1) : (activePlayer = 2);
+
+    // cell will become color of active player's team
+    this.style.backgroundColor = playerInfo[`${activePlayer - 1}`].color;
+
+    // update boardArray
+    for (let i = 0; i < boardArr.length; i++) {
+      // will loop through each row
+      console.log(`${i}: ${boardArr[i]}`);
+    }
+
+    // check win conditions
+
+    // add to turn counter
+    turnCount++;
+
+    // update active player display
+    displayActivePlayer.innerText = playerInfo[`${activePlayer - 1}`].username;
+  }
 }
