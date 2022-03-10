@@ -177,7 +177,7 @@ function init() {
       let cell = document.createElement("button");
       cell.classList.add("cell");
       rowX.appendChild(cell);
-      rowArr.push("");
+      rowArr.push(j);
     }
 
     boardArr.push(rowArr);
@@ -197,21 +197,23 @@ function init() {
 
   // turn functionality for game progression
   function turn() {
-    let activePlayer;
+    // determine active player
+    let activePlayer = 1;
     turnCount % 2 === 0 ? (activePlayer = 1) : (activePlayer = 2);
 
     // cell will become color of active player's team
     this.style.backgroundColor = playerInfo[`${activePlayer - 1}`].color;
 
     // update boardArray
-    // console.log(boardArr);
+    for (let i = 0; i < boardArr.length; i++) {
+      // will loop through each row
+      console.log(`${i}: ${boardArr[i]}`);
+    }
 
     // check win conditions
 
     // add to turn counter
     turnCount++;
-
-    // cycle active player
 
     // update active player display
     displayActivePlayer.innerText = playerInfo[`${activePlayer - 1}`].username;
