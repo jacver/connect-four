@@ -80,7 +80,7 @@ let gameInfo = {
   gridRows: 6,
   gridColumns: 7,
   //TODO: add a "start" game button to init modal that will run with a 6x7 grid default
-  gameBoardArr: [],
+  // gameBoardArr: [],
   winningCombo: [],
 };
 
@@ -151,6 +151,11 @@ document.querySelector(".btn-player2").onclick = function () {
   displayUsername2.innerText = playerInfo[1].username;
 };
 
+function hideModal() {
+  modal.classList.remove("visible");
+  modal.classList.add("hidden");
+}
+
 // ==========================================
 // ======Creating gameboard==================
 // ==========================================
@@ -183,7 +188,7 @@ btnsGetGrid.forEach((btn) =>
         let cell = document.createElement("button");
         cell.classList.add("cell");
         columnX.appendChild(cell);
-        rowArr.push(j);
+        rowArr.push("");
       }
 
       boardArr.push(rowArr);
@@ -212,7 +217,7 @@ btnsGetGrid.forEach((btn) =>
     // createWinningCombo(rowsColsArr[0], rowsColsArr[1]);
 
     // hide the modal so player can access grid
-    gameInit();
+    hideModal();
   })
 );
 
@@ -238,8 +243,3 @@ btnsGetGrid.forEach((btn) =>
 // }
 
 // //
-
-function gameInit() {
-  modal.classList.remove("visible");
-  modal.classList.add("hidden");
-}
