@@ -61,15 +61,15 @@ On gameOver
 let playerInfo = [
   {
     player: 1,
-    username: 'Player 1',
-    color: '#FFFF00',
+    username: "Player 1",
+    color: "#FFFF00",
     wins: 0,
     active: true,
   },
   {
     player: 2,
-    username: 'Player 2',
-    color: '#ff0000',
+    username: "Player 2",
+    color: "#ff0000",
     wins: 0,
     active: false,
   },
@@ -80,6 +80,7 @@ let gameInfo = {
   gridRows: 6,
   gridColumns: 7,
   //TODO: add a "start" game button to init modal that will run with a 6x7 grid default
+  gameBoardArr: [],
   winningCombo: [],
 };
 
@@ -88,29 +89,29 @@ let gameInfo = {
 // ========================
 
 // ----modal----
-const modal = document.querySelector('#modal');
-const modalContent = document.querySelector('#modal-content');
-const modalHeader = document.querySelector('.modal-header');
-const modalText = document.querySelector('.modal-text');
+const modal = document.querySelector("#modal");
+const modalContent = document.querySelector("#modal-content");
+const modalHeader = document.querySelector(".modal-header");
+const modalText = document.querySelector(".modal-text");
 
 // -----buttons----
-const btnsGetGrid = document.querySelectorAll('.btn-grid-choice'); // NODE LIST
-const btnRules = document.querySelector('.btn-rules');
-const btnStartGame = document.querySelector('.btn-start-game');
-const btnResetGame = document.querySelector('.btn-reset-game');
+const btnsGetGrid = document.querySelectorAll(".btn-grid-choice"); // NODE LIST
+const btnRules = document.querySelector(".btn-rules");
+const btnStartGame = document.querySelector(".btn-start-game");
+const btnResetGame = document.querySelector(".btn-reset-game");
 
 // ----Game Board------
-const gridContainer = document.querySelector('#grid-container');
+const gridContainer = document.querySelector("#grid-container");
 
 // ==========================================
 // ======Getting PLayer 1 Input==============
 // ==========================================
 
 // Getting username and color choice for player 1
-document.querySelector('.btn-player1').onclick = function () {
+document.querySelector(".btn-player1").onclick = function () {
   // pull username and color values from landing page modal
-  let username = document.querySelector('.input-username1').value;
-  let color = document.querySelector('.color-player1').value;
+  let username = document.querySelector(".input-username1").value;
+  let color = document.querySelector(".color-player1").value;
 
   // if no username is input, default of Player 1 will remain, otherwise update object
   if (username) {
@@ -123,17 +124,17 @@ document.querySelector('.btn-player1').onclick = function () {
   //   console.log(playerInfo[0]);
 
   // display updated name on gameboard
-  let displayUsername1 = document.querySelector('.display-username1');
+  let displayUsername1 = document.querySelector(".display-username1");
   displayUsername1.innerText = playerInfo[0].username;
 };
 // ==========================================
 // ======Getting PLayer 2 Input==============
 // ==========================================
 
-document.querySelector('.btn-player2').onclick = function () {
+document.querySelector(".btn-player2").onclick = function () {
   // pull username and color values from landing page modal
-  let username = document.querySelector('.input-username2').value;
-  let color = document.querySelector('.color-player2').value;
+  let username = document.querySelector(".input-username2").value;
+  let color = document.querySelector(".color-player2").value;
 
   // if no username is input, default of Player 2 will remain, otherwise update object
   if (username) {
@@ -146,7 +147,7 @@ document.querySelector('.btn-player2').onclick = function () {
   //   console.log(playerInfo[1]);
 
   // display updated name on gameboard
-  let displayUsername2 = document.querySelector('.display-username2');
+  let displayUsername2 = document.querySelector(".display-username2");
   displayUsername2.innerText = playerInfo[1].username;
 };
 
@@ -155,31 +156,40 @@ document.querySelector('.btn-player2').onclick = function () {
 // ==========================================
 
 btnsGetGrid.forEach((btn) =>
-  btn.addEventListener('click', function () {
+  btn.addEventListener("click", function () {
     let rows, columns;
     // break up the button text into rows and columns
-    let rowsColsArr = this.innerText.split('x');
+    let rowsColsArr = this.innerText.split("x");
     // assign rows and columns based on new array
-    rows = rowsColsArr[1];
-    columns = rowsColsArr[0];
+    rows = rowsColsArr[0];
+    columns = rowsColsArr[1];
     // console.log(rows);
     // console.log(columns);
+
+    let boardArr = [];
 
     // generate the grid using the rows and columns taken from the button
     for (let i = 0; i < rows; i++) {
       //   console.log(i + 1);
-      let column = document.createElement('div');
-      column.classList.add('column' + (i + 1));
+      let column = document.createElement("div");
+      column.classList.add("column" + (i + 1));
       gridContainer.appendChild(column);
+      // blank 2d array
+      let rowArr = [];
 
-      let columnX = document.querySelector('.column' + (i + 1));
+      let columnX = document.querySelector(".column" + (i + 1));
 
       for (let j = 0; j < columns; j++) {
-        let cell = document.createElement('button');
-        cell.classList.add('cell');
+        let cell = document.createElement("button");
+        cell.classList.add("cell");
         columnX.appendChild(cell);
+        rowArr.push(j);
       }
+
+      boardArr.push(rowArr);
     }
+
+    console.log(boardArr);
 
     // TODO: generate winningCombos - must dynamically represent selected grid size.I believe this should be inside of the game init function and then pushed into empty array in global vars. This allows the winning condition to exist for each new grid. Then be checked in the turn() function that will manage game progression.
 
@@ -208,6 +218,15 @@ btnsGetGrid.forEach((btn) =>
 
 // TODO: I cannot querySelect the cells outside of the initialization function. I wante a turn function to run off of event listener on each button (forEach on Cells). However, I want this seperate from init function so i need to find a way to pull cells into that function. Maybe create an empty array of cells then push the newly created cells into it?
 
+// TODO: tracking mechanism: one large array
+
+// [[row 1], [ row 2 ], [row 3 ], [row 4 ]]; // each row filled with X empty strings to align w/ column num
+
+// games to compare: minesweeper, checkers,
+
+// step 1: maniuplate starting array dynamically
+//
+
 // function turn() {
 //   // alternate players based on turn # (even or odd)
 //   turn % 2 === 0 ? (activePlayer = 1) : (activePlayer = 2);
@@ -221,6 +240,6 @@ btnsGetGrid.forEach((btn) =>
 // //
 
 function gameInit() {
-  modal.classList.remove('visible');
-  modal.classList.add('hidden');
+  modal.classList.remove("visible");
+  modal.classList.add("hidden");
 }
