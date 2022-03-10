@@ -95,3 +95,7 @@ button:hover {
   background-color: white;
   border: 3px black solid;
 }
+
+.cell:hover {
+  transform: scale(1.1);
+}
