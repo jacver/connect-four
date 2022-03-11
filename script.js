@@ -166,18 +166,18 @@ function init() {
   // generate the grid using the rows and columns taken from the button
   for (let i = 0; i < rows; i++) {
     let row = document.createElement("div");
-    row.classList.add("row" + (i + 1));
+    row.classList.add("row" + i);
     gridContainer.appendChild(row);
     // blank 2d array
     let rowArr = [];
 
-    let rowX = document.querySelector(".row" + (i + 1));
+    let rowX = document.querySelector(".row" + i);
 
     for (let j = 0; j < columns; j++) {
       let cell = document.createElement("button");
-      cell.classList.add("cell");
+      cell.classList.add(`cell`, `column${j}`);
       rowX.appendChild(cell);
-      rowArr.push(j);
+      rowArr.push(" ");
     }
 
     boardArr.push(rowArr);
@@ -203,12 +203,15 @@ function init() {
 
     // cell will become color of active player's team
     this.style.backgroundColor = playerInfo[`${activePlayer - 1}`].color;
+    // this.innerText =
 
     // update boardArray
-    for (let i = 0; i < boardArr.length; i++) {
-      // will loop through each row
-      console.log(`${i}: ${boardArr[i]}`);
-    }
+    // securing child number (col)
+    let y = parseInt(this.classList[1].split("column")[1]);
+    // securing parent number (row)
+    let x = parseInt(this.parentNode.classList[0].split("row")[1]);
+    console.log(boardArr);
+    boardArr[x][y] = activePlayer;
 
     // check win conditions
 
