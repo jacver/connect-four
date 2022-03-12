@@ -112,7 +112,6 @@ document.querySelector(".btn-player1").onclick = function () {
   if (color !== playerInfo[0].color) {
     playerInfo[0].color = color;
   }
-  //   console.log(playerInfo[0]);
 
   // display updated name on gameboard
   let displayUsername1 = document.querySelector(".display-username1");
@@ -135,7 +134,6 @@ document.querySelector(".btn-player2").onclick = function () {
   if (color !== playerInfo[1].color) {
     playerInfo[1].color = color;
   }
-  //   console.log(playerInfo[1]);
 
   // display updated name on gameboard
   let displayUsername2 = document.querySelector(".display-username2");
@@ -161,24 +159,38 @@ function init() {
   rows = rowsColsArr[0];
   columns = rowsColsArr[1];
 
+  // Generate HTML gameboard using CSS grid
+  gridContainer.style.gridTemplateColumns = `repeat(${columns}, auto)`;
+  gridContainer.style.gridTemplateRows = `repeat(${rows}, auto)`;
+
+  // Empty javascript board array
   let boardArr = [];
 
-  // generate the grid using the rows and columns taken from the button
-  for (let i = 0; i < rows; i++) {
-    let row = document.createElement("div");
-    row.classList.add("row" + i);
-    gridContainer.appendChild(row);
+  // create each column and append it to container
+  for (let i = 0; i < columns; i++) {
+    let column = document.createElement("div");
+    column.classList.add("column" + i);
+    gridContainer.appendChild(column);
     // blank 2d array
     let rowArr = [];
 
-    let rowX = document.querySelector(".row" + i);
+    let colX = document.querySelector(".column" + i);
 
-    for (let j = 0; j < columns; j++) {
-      let cell = document.createElement("button");
-      cell.classList.add(`cell`, `column${j}`);
-      rowX.appendChild(cell);
-      rowArr.push(" ");
+    // Nested loop to generate each cell and append to COLUMN before creating next column
+    for (let j = 0; j < rows; j++) {
+      let cell = document.createElement("div");
+      cell.classList.add(`cell`, `row${j}`);
+      colX.appendChild(cell);
+      rowArr.push(`${j}`);
     }
+
+    let btnColumnButton = document.createElement("button");
+    btnColumnButton.classList.add("btn-column-button");
+    btnColumnButton.innerText = `${i + 1}`;
+    btnColumnButton.style.width = "20px";
+    btnColumnButton.style.textAlign = "center";
+
+    colX.appendChild(btnColumnButton);
 
     boardArr.push(rowArr);
   }
@@ -193,27 +205,55 @@ function init() {
   // set starting turn counter
   let turnCount = 1;
 
-  cells.forEach((cell) => cell.addEventListener("click", turn));
+  // cells.forEach((cell) => cell.addEventListener("click", turn));
 
+  const btnsChooseColumn = document.querySelectorAll(".btn-column-button");
+
+  btnsChooseColumn.forEach((btn) => btn.addEventListener("click", turn));
+
+  //-------------------------------------------------------------------
   // turn functionality for game progression
   function turn() {
     // determine active player
     let activePlayer = 1;
     turnCount % 2 === 0 ? (activePlayer = 1) : (activePlayer = 2);
 
+    // This function will start at the column button, then move up through the siblings (cells) and determine if 1) they are not the original button and 2) that they don't contain class occupied. If the cell is free, it will stop. If not, it will move up 1
+    let findFirstCell = function (elem) {
+      let sibling = elem.previousSibling;
+
+      while (sibling.previousSibling || sibling.classList.contains("row0")) {
+        if (sibling !== elem && !sibling.classList.contains("occupied")) {
+          sibling.classList.add("occupied");
+          sibling.style.backgroundColor =
+            playerInfo[`${activePlayer - 1}`].color;
+          break;
+        } else if (sibling.classList.contains("occupied")) {
+          sibling = sibling.previousSibling;
+          console.log(sibling);
+          continue;
+        } else if (sibling.classList.contains("row0")) {
+          sibling.style.backgroundColor =
+            playerInfo[`${activePlayer - 1}`].color;
+        }
+      }
+    };
+    findFirstCell(this);
+
+    // update html board
     // cell will become color of active player's team
-    this.style.backgroundColor = playerInfo[`${activePlayer - 1}`].color;
-    // this.innerText =
 
     // update boardArray
     // securing child number (col)
-    let y = parseInt(this.classList[1].split("column")[1]);
-    // securing parent number (row)
-    let x = parseInt(this.parentNode.classList[0].split("row")[1]);
-    console.log(boardArr);
-    boardArr[x][y] = activePlayer;
+    // let y = parseInt(this.classList[1].split("row")[1]);
+    // // securing parent number (row)
+    // let x = parseInt(this.parentNode.classList[0].split("column")[1]);
+    // console.log(boardArr);
+    // // boardArr[x][y]
 
-    // check win conditions
+    // boardArr[x][y] = activePlayer;
+
+    // // check win conditions
 
     // add to turn counter
     turnCount++;
@@ -222,3 +262,13 @@ function init() {
     displayActivePlayer.innerText = playerInfo[`${activePlayer - 1}`].username;
   }
 }
+
+// 3x3 4x4 game connect 2 to get game logic working and then grow
+
+// rather than individual buttons in each element, put a button below each column
+
+// object needs a class of occupied that will be added by a loop maybe some nested guy reading UP the column  to find the first index that is NOT occupied
+
+// // if !occupied place token there
+
+// use grid rather than flex
