@@ -163,16 +163,13 @@ function init() {
   gridContainer.style.gridTemplateColumns = `repeat(${columns}, auto)`;
   gridContainer.style.gridTemplateRows = `repeat(${rows}, auto)`;
 
-  // Empty javascript board array
-  let boardArr = [];
-
   // create each column and append it to container
   for (let i = 0; i < columns; i++) {
     let column = document.createElement("div");
     column.classList.add("column" + i);
     gridContainer.appendChild(column);
     // blank 2d array
-    let rowArr = [];
+    // let rowArr = [];
 
     let colX = document.querySelector(".column" + i);
 
@@ -181,7 +178,7 @@ function init() {
       let cell = document.createElement("div");
       cell.classList.add(`cell`, `row${j}`);
       colX.appendChild(cell);
-      rowArr.push(`${j}`);
+      // rowArr.push(" ");
     }
 
     let btnColumnButton = document.createElement("button");
@@ -192,18 +189,27 @@ function init() {
 
     colX.appendChild(btnColumnButton);
 
+    // boardArr.push(rowArr);
+  }
+
+  // Empty javascript board array
+  let boardArr = [];
+
+  for (let i = 0; i < rows; i++) {
+    let rowArr = [];
+    for (let j = 0; j < columns; j++) {
+      rowArr.push(" ");
+    }
     boardArr.push(rowArr);
   }
+  // console.log(boardArr);
 
   // hide the modal so player can access game
   modal.classList.remove("visible");
   modal.classList.add("hidden");
 
-  // add event listener to cells (slots in the game board)
-  const cells = document.querySelectorAll(".cell");
-
   // set starting turn counter
-  let turnCount = 1;
+  let turnCount = 0;
 
   // cells.forEach((cell) => cell.addEventListener("click", turn));
 
@@ -218,6 +224,7 @@ function init() {
     let activePlayer = 1;
     turnCount % 2 === 0 ? (activePlayer = 1) : (activePlayer = 2);
 
+    // update html board and JS array
     // This function will start at the column button, then move up through the siblings (cells) and determine if 1) they are not the original button and 2) that they don't contain class occupied. If the cell is free, it will stop. If not, it will move up 1
     let findFirstCell = function (elem) {
       let sibling = elem.previousSibling;
@@ -227,10 +234,15 @@ function init() {
           sibling.classList.add("occupied");
           sibling.style.backgroundColor =
             playerInfo[`${activePlayer - 1}`].color;
+
+          let x = parseInt(sibling.parentNode.classList[0].split("column")[1]);
+          let y = parseInt(sibling.classList[1].split("row")[1]);
+
+          boardArr[y][x] = activePlayer;
+
           break;
         } else if (sibling.classList.contains("occupied")) {
           sibling = sibling.previousSibling;
-          console.log(sibling);
           continue;
         } else if (sibling.classList.contains("row0")) {
           sibling.style.backgroundColor =
@@ -239,19 +251,6 @@ function init() {
       }
     };
     findFirstCell(this);
-
-    // update html board
-    // cell will become color of active player's team
-
-    // update boardArray
-    // securing child number (col)
-    // let y = parseInt(this.classList[1].split("row")[1]);
-    // // securing parent number (row)
-    // let x = parseInt(this.parentNode.classList[0].split("column")[1]);
-    // console.log(boardArr);
-    // // boardArr[x][y]
-
-    // boardArr[x][y] = activePlayer;
 
     // // check win conditions
 
