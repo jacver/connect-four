@@ -61,15 +61,15 @@ On gameOver
 let playerInfo = [
   {
     player: 1,
-    username: "Player 1",
-    color: "#FFFF00",
+    username: 'Player 1',
+    color: '#FFFF00',
     wins: 0,
     active: true,
   },
   {
     player: 2,
-    username: "Player 2",
-    color: "#ff0000",
+    username: 'Player 2',
+    color: '#ff0000',
     wins: 0,
     active: false,
   },
@@ -80,29 +80,29 @@ let playerInfo = [
 // ========================
 
 // ----modal----
-const modal = document.querySelector("#modal");
-const modalContent = document.querySelector("#modal-content");
-const modalHeader = document.querySelector(".modal-header");
-const modalText = document.querySelector(".modal-text");
+const modal = document.querySelector('#modal');
+const modalContent = document.querySelector('#modal-content');
+const modalHeader = document.querySelector('.modal-header');
+const modalText = document.querySelector('.modal-text');
 
 // -----buttons----
-const btnsGetGrid = document.querySelectorAll(".btn-grid-choice"); // NODE LIST
-const btnRules = document.querySelector(".btn-rules");
-const btnStartGame = document.querySelector(".btn-start-game");
-const btnResetGame = document.querySelector(".btn-reset-game");
+const btnsGetGrid = document.querySelectorAll('.btn-grid-choice'); // NODE LIST
+const btnRules = document.querySelector('.btn-rules');
+const btnStartGame = document.querySelector('.btn-start-game');
+const btnResetGame = document.querySelector('.btn-reset-game');
 
 // ----Game Board------
-const gridContainer = document.querySelector("#grid-container");
+const gridContainer = document.querySelector('#grid-container');
 
 // ==========================================
 // ======Getting PLayer 1 Input==============
 // ==========================================
 
 // Getting username and color choice for player 1
-document.querySelector(".btn-player1").onclick = function () {
+document.querySelector('.btn-player1').onclick = function () {
   // pull username and color values from landing page modal
-  let username = document.querySelector(".input-username1").value;
-  let color = document.querySelector(".color-player1").value;
+  let username = document.querySelector('.input-username1').value;
+  let color = document.querySelector('.color-player1').value;
 
   // if no username is input, default of Player 1 will remain, otherwise update object
   if (username) {
@@ -114,17 +114,17 @@ document.querySelector(".btn-player1").onclick = function () {
   }
 
   // display updated name on gameboard
-  let displayUsername1 = document.querySelector(".display-username1");
+  let displayUsername1 = document.querySelector('.display-username1');
   displayUsername1.innerText = playerInfo[0].username;
 };
 // ==========================================
 // ======Getting PLayer 2 Input==============
 // ==========================================
 
-document.querySelector(".btn-player2").onclick = function () {
+document.querySelector('.btn-player2').onclick = function () {
   // pull username and color values from landing page modal
-  let username = document.querySelector(".input-username2").value;
-  let color = document.querySelector(".color-player2").value;
+  let username = document.querySelector('.input-username2').value;
+  let color = document.querySelector('.color-player2').value;
 
   // if no username is input, default of Player 2 will remain, otherwise update object
   if (username) {
@@ -136,7 +136,7 @@ document.querySelector(".btn-player2").onclick = function () {
   }
 
   // display updated name on gameboard
-  let displayUsername2 = document.querySelector(".display-username2");
+  let displayUsername2 = document.querySelector('.display-username2');
   displayUsername2.innerText = playerInfo[1].username;
 };
 
@@ -144,17 +144,17 @@ document.querySelector(".btn-player2").onclick = function () {
 // ======Creating gameboard==================
 // ==========================================
 
-btnsGetGrid.forEach((btn) => btn.addEventListener("click", init));
+btnsGetGrid.forEach((btn) => btn.addEventListener('click', init));
 
 function init() {
   // set default active player
-  const displayActivePlayer = document.querySelector(".active-player");
+  const displayActivePlayer = document.querySelector('.active-player');
   displayActivePlayer.innerText = playerInfo[0].username;
 
   // get gameboard
   let rows, columns;
   // break up the button text into rows and columns
-  let rowsColsArr = this.innerText.split("x");
+  let rowsColsArr = this.innerText.split('x');
   // assign rows and columns based on new array
   rows = rowsColsArr[0];
   columns = rowsColsArr[1];
@@ -165,32 +165,25 @@ function init() {
 
   // create each column and append it to container
   for (let i = 0; i < columns; i++) {
-    let column = document.createElement("div");
-    column.classList.add("column" + i);
+    let column = document.createElement('div');
+    column.classList.add('column' + i, 'column');
     gridContainer.appendChild(column);
     // blank 2d array
     // let rowArr = [];
 
-    let colX = document.querySelector(".column" + i);
+    let colX = document.querySelector('.column' + i);
 
     // Nested loop to generate each cell and append to COLUMN before creating next column
     for (let j = 0; j < rows; j++) {
-      let cell = document.createElement("div");
+      let cell = document.createElement('div');
       cell.classList.add(`cell`, `row${j}`);
       colX.appendChild(cell);
       // rowArr.push(" ");
     }
-
-    let btnColumnButton = document.createElement("button");
-    btnColumnButton.classList.add("btn-column-button");
-    btnColumnButton.innerText = `${i + 1}`;
-    btnColumnButton.style.width = "20px";
-    btnColumnButton.style.textAlign = "center";
-
-    colX.appendChild(btnColumnButton);
-
-    // boardArr.push(rowArr);
   }
+
+  let gameColumns = document.querySelectorAll('.column');
+  console.log(gameColumns);
 
   // Empty javascript board array
   let boardArr = [];
@@ -198,24 +191,20 @@ function init() {
   for (let i = 0; i < rows; i++) {
     let rowArr = [];
     for (let j = 0; j < columns; j++) {
-      rowArr.push(" ");
+      rowArr.push(' ');
     }
     boardArr.push(rowArr);
   }
   // console.log(boardArr);
 
   // hide the modal so player can access game
-  modal.classList.remove("visible");
-  modal.classList.add("hidden");
+  modal.classList.remove('visible');
+  modal.classList.add('hidden');
 
   // set starting turn counter
   let turnCount = 0;
 
-  // cells.forEach((cell) => cell.addEventListener("click", turn));
-
-  const btnsChooseColumn = document.querySelectorAll(".btn-column-button");
-
-  btnsChooseColumn.forEach((btn) => btn.addEventListener("click", turn));
+  gameColumns.forEach((column) => column.addEventListener('click', turn));
 
   //-------------------------------------------------------------------
   // turn functionality for game progression
@@ -227,30 +216,31 @@ function init() {
     // update html board and JS array
     // This function will start at the column button, then move up through the siblings (cells) and determine if 1) they are not the original button and 2) that they don't contain class occupied. If the cell is free, it will stop. If not, it will move up 1
     let findFirstCell = function (elem) {
-      let sibling = elem.previousSibling;
+      let sibling = elem.lastChild;
 
-      while (sibling.previousSibling || sibling.classList.contains("row0")) {
-        if (sibling !== elem && !sibling.classList.contains("occupied")) {
-          sibling.classList.add("occupied");
+      while (sibling.previousSibling || sibling.classList.contains('row0')) {
+        if (sibling !== elem && !sibling.classList.contains('occupied')) {
+          sibling.classList.add('occupied');
           sibling.style.backgroundColor =
             playerInfo[`${activePlayer - 1}`].color;
 
-          let x = parseInt(sibling.parentNode.classList[0].split("column")[1]);
-          let y = parseInt(sibling.classList[1].split("row")[1]);
+          let x = parseInt(sibling.parentNode.classList[0].split('column')[1]);
+          let y = parseInt(sibling.classList[1].split('row')[1]);
 
           boardArr[y][x] = activePlayer;
 
           break;
-        } else if (sibling.classList.contains("occupied")) {
+        } else if (sibling.classList.contains('occupied')) {
           sibling = sibling.previousSibling;
           continue;
-        } else if (sibling.classList.contains("row0")) {
+        } else if (sibling.classList.contains('row0')) {
           sibling.style.backgroundColor =
             playerInfo[`${activePlayer - 1}`].color;
         }
       }
     };
     findFirstCell(this);
+    console.log(boardArr);
 
     // // check win conditions
 

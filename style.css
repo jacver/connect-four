@@ -86,22 +86,6 @@ button:hover {
   padding: 0.5rem;
 }
 
-/* .column0,
-.column1,
-.column2,
-.column3,
-.column4,
-.column5,
-.column6,
-.column7,
-.column8,
-.column9,
-.column10 {
-  text-align: center;
-  justify-content: center;
-  align-items: ;
-} */
-
 .cell {
   width: 25px;
   height: 25px;
@@ -111,12 +95,6 @@ button:hover {
   border: 3px black solid;
 }
 
-.cell:hover {
-}
-
-.btn-column-button {
-  font-size: 10px;
-  border-radius: 50%;
-  padding: 0;
-  margin: 0;
+.column:hover {
+  transform: scale(1.05);
 }
