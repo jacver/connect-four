@@ -182,9 +182,6 @@ function init() {
     }
   }
 
-  let gameColumns = document.querySelectorAll('.column');
-  console.log(gameColumns);
-
   // Empty javascript board array
   let boardArr = [];
 
@@ -204,6 +201,8 @@ function init() {
   // set starting turn counter
   let turnCount = 0;
 
+  // Select each column and give event listener to run game turn
+  let gameColumns = document.querySelectorAll('.column');
   gameColumns.forEach((column) => column.addEventListener('click', turn));
 
   //-------------------------------------------------------------------
@@ -224,9 +223,11 @@ function init() {
           sibling.style.backgroundColor =
             playerInfo[`${activePlayer - 1}`].color;
 
+          // seperating the number from each row/column class name to get XY coords
           let x = parseInt(sibling.parentNode.classList[0].split('column')[1]);
           let y = parseInt(sibling.classList[1].split('row')[1]);
 
+          // inserting those coords into JS array
           boardArr[y][x] = activePlayer;
 
           break;
@@ -240,9 +241,15 @@ function init() {
       }
     };
     findFirstCell(this);
-    console.log(boardArr);
 
     // // check win conditions
+    function checkVertical(column) {
+      for (let i = 0; i < rows; i++) {
+        console.log(boardArr);
+        console.log(column);
+      }
+    }
+    checkVertical();
 
     // add to turn counter
     turnCount++;
@@ -251,13 +258,3 @@ function init() {
     displayActivePlayer.innerText = playerInfo[`${activePlayer - 1}`].username;
   }
 }
-
-// 3x3 4x4 game connect 2 to get game logic working and then grow
-
-// rather than individual buttons in each element, put a button below each column
-
-// object needs a class of occupied that will be added by a loop maybe some nested guy reading UP the column  to find the first index that is NOT occupied
-
-// // if !occupied place token there
-
-// use grid rather than flex
