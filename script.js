@@ -241,27 +241,43 @@ function init() {
       }
     };
     findFirstCell(this);
+    console.log(boardArr);
 
     // // check win conditions
-    // count starts at 0 and will be added to when the checkwin functions below identify repeat numbers in the array. If count hits 4, return true and trigger win conditions.
-    let count = 0;
 
-    function checkHorizontal(row) {
-      for (let i = 0; i < rows; i++) {
-        // loop through each row in board array
-        let row = boardArr[i];
-        // console.log(row);
-        for (let j = 0; j < row.length; j++) {
-          // problem: I'm looping through the entire array, not just the row i'm checking
-          let position = row[j];
-          console.log(position);
+    function checkHorizontal() {
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < columns; c++) {
+          let value = boardArr[r][c]; // will return x, 1, or 2
+          // inner for loop should iterate through individual row
+          for (let offset = 1; offset < 4; offset++) {
+            // will look 1, 2, 3 to right
+            if (c + offset > columns - 1) {
+              // -1 to account for 0 index
+              break; // breaks out of loop if no possible wins to right
+            }
+            if (value !== boardArr[r][c + offset]) {
+              break; // breaks out of for loop if win isnt possible
+            }
+            return true;
+          }
+
+          // define cell
+          // If cell = cell + 1 -> cell = cell + 1 -> run again. Need loop here too?!
+          // if count >= 4 return true and trigger game win
+
+          // get each cell and check for 4 right, 4 down, 4 diag
+          // if column + j is off board, stop checks
         }
       }
+      // if none of the above trues are triggered, return false and check for vertical wins
+      return false;
     }
 
     checkHorizontal();
 
-    function checkVertical(column) {
+    // for here, invert the for loops from checkHorizontal (columns -> rows)
+    function checkVertical() {
       for (let i = 0; i < rows; i++) {
         // loop through each column in board array
         let column = boardArr[i];
@@ -270,8 +286,11 @@ function init() {
     }
     checkVertical();
     // checkVertical();
-    function checkDiagonal(boardArr) {
+
+    function checkDiagonal() {
       // loop through entire board array adding row + i, column + i to check coords
+      let value = boardArr[r + offset][c + offset]; // down and right
+      // conditional check to go offboard any directions too low left and right, no need up
     }
     checkDiagonal();
 
