@@ -12,10 +12,17 @@
     <h1>Connect 4</h1>
     <main>
       <section id="modal" class="visible">
-        <div id="modal-content">
+        <div role="modal container" id="modal-content">
           <h2 class="modal-header"></h2>
-          <div id="player-settings-container">
-            <div id="player-one-settings" class="player-input">
+          <div
+            role="player customization options"
+            id="player-settings-container"
+          >
+            <div
+              role="customize player 1"
+              id="player-one-settings"
+              class="player-input"
+            >
               <form action="">
                 <label>Player 1:</label>
                 <input
@@ -28,7 +35,11 @@
                 <input class="btn-player1" type="button" value="Submit" />
               </form>
             </div>
-            <div id="player-two-settings" class="player-input">
+            <div
+              role="customize player 2"
+              id="player-two-settings"
+              class="player-input"
+            >
               <form action="">
                 <label>Player 2:</label>
                 <input
@@ -43,38 +54,53 @@
             </div>
           </div>
           <h2>Choose a desired grid size:</h2>
-          <div class="grid-size-container">
-            <div class="grid-size-row">
-              <button class="btn-grid-choice">6x7</button>
-              <button class="btn-grid-choice">8x7</button>
+          <div role="gameboard size determination" class="grid-size-container">
+            <div role="gameboard size row" class="grid-size-row">
+              <button role="select gameboard size" class="btn-grid-choice">
+                6x7
+              </button>
+              <button role="select gameboard size" class="btn-grid-choice">
+                8x7
+              </button>
             </div>
-            <div class="grid-size-row">
-              <button class="btn-grid-choice">5x4</button>
-              <button class="btn-grid-choice">9x7</button>
+            <div role="gameboard size row" class="grid-size-row">
+              <button role="select gameboard size" class="btn-grid-choice">
+                5x4
+              </button>
+              <button role="select gameboard size" class="btn-grid-choice">
+                9x7
+              </button>
             </div>
-            <div class="grid-size-row">
-              <button class="btn-grid-choice">6x5</button>
-              <button class="btn-grid-choice">10x7</button>
+            <div role="gameboard size row" class="grid-size-row">
+              <button role="select gameboard size" class="btn-grid-choice">
+                6x5
+              </button>
+              <button role="select gameboard size" class="btn-grid-choice">
+                10x7
+              </button>
             </div>
           </div>
         </div>
       </section>
-      <section id="info-bar">
+      <section role="game info bar" id="info-bar">
         <div>Current Turn:<span class="active-player"></span></div>
-        <div id="score-container">
-          <div>
+        <div role="scoreboard" id="score-container">
+          <div role="player 1 score">
             <span class="display-username1">Player 1</span> wins:
             <span></span>
           </div>
           <div>
-            <span class="display-username2">Player 2</span> wins:
+            <span role="player 2 score" class="display-username2"
+              >Player 2</span
+            >
+            wins:
             <span></span>
           </div>
         </div>
         <button class="btn-rules">Rules</button>
         <button class="btn-reset-game">Reset Game</button>
       </section>
-      <section id="grid-container">
+      <section role="gameboard container" id="grid-container">
         <!-- grid goes here -->
       </section>
     </main>
