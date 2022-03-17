@@ -244,55 +244,78 @@ function init() {
     console.log(boardArr);
 
     // // check win conditions
+    let numConnected = 0;
 
     function checkHorizontal() {
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < columns; c++) {
-          let value = boardArr[r][c]; // will return x, 1, or 2
-          // inner for loop should iterate through individual row
-          for (let offset = 1; offset < 4; offset++) {
-            // will look 1, 2, 3 to right
-            if (c + offset > columns - 1) {
-              // -1 to account for 0 index
-              break; // breaks out of loop if no possible wins to right
+      // console.log("checking horizontal");
+      for (let i = 0; i < boardArr.length; i++) {
+        for (let j = 0; j < boardArr[i].length; j++) {
+          if (boardArr[i][j] == `${activePlayer}`) {
+            if (
+              boardArr[i][j + 1] == `${activePlayer}` &&
+              boardArr[i][j + 2] == `${activePlayer}` &&
+              boardArr[i][j + 3] == `${activePlayer}`
+            ) {
+              alert(`${playerInfo[activePlayer - 1].username} wins!`);
             }
-            if (value !== boardArr[r][c + offset]) {
-              break; // breaks out of for loop if win isnt possible
-            }
-            return true;
           }
-
-          // define cell
-          // If cell = cell + 1 -> cell = cell + 1 -> run again. Need loop here too?!
-          // if count >= 4 return true and trigger game win
-
-          // get each cell and check for 4 right, 4 down, 4 diag
-          // if column + j is off board, stop checks
         }
       }
-      // if none of the above trues are triggered, return false and check for vertical wins
-      return false;
     }
-
     checkHorizontal();
 
-    // for here, invert the for loops from checkHorizontal (columns -> rows)
     function checkVertical() {
-      for (let i = 0; i < rows; i++) {
-        // loop through each column in board array
-        let column = boardArr[i];
-        // console.log(column);
+      // console.log("checking vertical");
+      for (let i = 0; i < boardArr.length; i++) {
+        for (let j = 0; j < boardArr[i].length; j++) {
+          if (boardArr[i][j] == `${activePlayer}`) {
+            if (
+              boardArr[i - 1][j] == `${activePlayer}` &&
+              boardArr[i - 2][j] == `${activePlayer}` &&
+              boardArr[i - 3][j] == `${activePlayer}`
+            ) {
+              alert(`${playerInfo[activePlayer - 1].username} wins!`);
+            }
+          }
+        }
       }
     }
     checkVertical();
-    // checkVertical();
 
-    function checkDiagonal() {
-      // loop through entire board array adding row + i, column + i to check coords
-      let value = boardArr[r + offset][c + offset]; // down and right
-      // conditional check to go offboard any directions too low left and right, no need up
-    }
-    checkDiagonal();
+    // function checkDiagonal() {
+    //   // check down right
+    //   // check down left
+    //   console.log("checking down + right");
+    //   for (let i = 0; i < boardArr.length; i++) {
+    //     for (let j = 0; j < boardArr[i].length; j++) {
+    //       if (boardArr[i][j] == `${activePlayer}`) {
+    //         if (
+    //           boardArr[i + 1][j + 1] == `${activePlayer}` &&
+    //           boardArr[i + 2][j + 1] == `${activePlayer}` &&
+    //           boardArr[i + 3][j + 1] == `${activePlayer}`
+    //         ) {
+    //           console.log("diagonal win (down -> right)");
+    //         }
+    //       }
+    //     }
+    //   }
+
+    //   console.log("checking down + left");
+    //   for (let i = 0; i < boardArr.length; i++) {
+    //     for (let j = 0; j < boardArr[i].length; j++) {
+    //       if (boardArr[i][j] == `${activePlayer}`) {
+    //         if (
+    //           boardArr[i + 1][j - 1] == `${activePlayer}` &&
+    //           boardArr[i + 2][j - 1] == `${activePlayer}` &&
+    //           boardArr[i + 3][j - 1] == `${activePlayer}`
+    //         ) {
+    //           console.log("diagonal win (down -> right)");
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    // checkDiagonal();
 
     // add to turn counter
     turnCount++;
