@@ -1,59 +1,3 @@
-/*
-
-=============
-on page load:
-=============
-    [x] a modal will open
-        [x] modal will let player 1 pick a username
-        [x] modal will let player 1 pick a team color
-        [x] modal will let player 2 pick a username
-        [x] modal will let player 2 pick a team color
-
-        [x] modal will allow player to select grid size with buttons
-            [x] game will run at 6x7 by default
-            [x] 5x4 grid button
-            [x] 6x5 grid button
-            [x] 8x7 grid button
-            [x] 9x7 grid button
-            [x] 10x7 grid button
-
-        > Player can read rules from modal via a button 
-        > player can start game via a button
-            > start game load grid with player specs (6x7 by default) 
-            !!! maybe the "start game" functionality should run when player selects grid rather than be a seperate button? !!!
-
-============
-On gameInit
-============
-    > game will load after the steps above take place and player either clicks start or selects grid (depending on how I decide to run it)
-    > above gameboard should show:
-        > current player's turn
-        > Player 1 win total
-        > player 2 Win total
-        > how to play button 
-            > will open modal with rules
-        > reset game button
-    
-    [x] gameboard 
-        [x] Generated DYNAMICALLY using grid 
-
-    > on a players turn the following will happen:
-        > implement a way to indicate which column is hovered over
-            > highlight circle border? highlight column? circles get a little bigger?
-                > player will select a circle to fill
-         > must fill lowest space in column (no floating spaces)
-            >
-
-
-============
-On gameOver
-============
-    > modal opens to congratulate winning player
-        > modal has "play again" button
-        > modal has "change grid button"
-    > update player record
-*/
-
 // =================
 // ===global vars===
 // =================
@@ -241,7 +185,7 @@ function init() {
       }
     };
     findFirstCell(this);
-    console.log(boardArr);
+    // console.log(boardArr);
 
     // // check win conditions
     let numConnected = 0;
@@ -268,7 +212,7 @@ function init() {
       // console.log("checking vertical");
       for (let i = 0; i < boardArr.length; i++) {
         for (let j = 0; j < boardArr[i].length; j++) {
-          if (boardArr[i][j] == `${activePlayer}`) {
+          if (boardArr[i][j] == `${activePlayer}` && boardArr[i] < rows) {
             if (
               boardArr[i - 1][j] == `${activePlayer}` &&
               boardArr[i - 2][j] == `${activePlayer}` &&
@@ -282,40 +226,43 @@ function init() {
     }
     checkVertical();
 
-    // function checkDiagonal() {
-    //   // check down right
-    //   // check down left
-    //   console.log("checking down + right");
-    //   for (let i = 0; i < boardArr.length; i++) {
-    //     for (let j = 0; j < boardArr[i].length; j++) {
-    //       if (boardArr[i][j] == `${activePlayer}`) {
-    //         if (
-    //           boardArr[i + 1][j + 1] == `${activePlayer}` &&
-    //           boardArr[i + 2][j + 1] == `${activePlayer}` &&
-    //           boardArr[i + 3][j + 1] == `${activePlayer}`
-    //         ) {
-    //           console.log("diagonal win (down -> right)");
-    //         }
-    //       }
-    //     }
-    //   }
-
-    //   console.log("checking down + left");
-    //   for (let i = 0; i < boardArr.length; i++) {
-    //     for (let j = 0; j < boardArr[i].length; j++) {
-    //       if (boardArr[i][j] == `${activePlayer}`) {
-    //         if (
-    //           boardArr[i + 1][j - 1] == `${activePlayer}` &&
-    //           boardArr[i + 2][j - 1] == `${activePlayer}` &&
-    //           boardArr[i + 3][j - 1] == `${activePlayer}`
-    //         ) {
-    //           console.log("diagonal win (down -> right)");
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
-    // checkDiagonal();
+    function checkDiagonal() {
+      // check down right
+      // console.log("checking up + right");
+      for (let i = 0; i < boardArr.length; i++) {
+        for (let j = 0; j < boardArr[i].length; j++) {
+          if (
+            boardArr[i][j] == `${activePlayer}` &&
+            boardArr[i + 1] < rows &&
+            boardArr[j + 1] < columns
+          ) {
+            if (
+              boardArr[i - 1][j - 1] == `${activePlayer}` &&
+              boardArr[i - 2][j - 1] == `${activePlayer}` &&
+              boardArr[i - 3][j - 1] == `${activePlayer}`
+            ) {
+              console.log("diagonal win (up -> right)");
+            }
+          }
+        }
+      }
+      // check down left
+      // // console.log("checking up + left");
+      // for (let i = 0; i < boardArr.length; i++) {
+      //   for (let j = 0; j < boardArr[i].length; j++) {
+      //     if (boardArr[i][j] == `${activePlayer}`) {
+      //       if (
+      //         boardArr[i + 1][j - 1] == `${activePlayer}` &&
+      //         boardArr[i + 2][j - 1] == `${activePlayer}` &&
+      //         boardArr[i + 3][j - 1] == `${activePlayer}`
+      //       ) {
+      //         console.log("diagonal win (up-> right)");
+      //       }
+      //     }
+      //   }
+      // }
+    }
+    checkDiagonal();
 
     // add to turn counter
     turnCount++;
