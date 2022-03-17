@@ -147,7 +147,12 @@ function init() {
 
   // Select each column and give event listener to run game turn
   let gameColumns = document.querySelectorAll('.column');
-  gameColumns.forEach((column) => column.addEventListener('click', turn));
+
+  gameColumns.forEach((column) => {
+    column.addEventListener('click', turn);
+    column.addEventListener('mouseenter', mouseEnterColumn);
+    column.addEventListener('mouseleave', mouseExitColumn);
+  });
 
   //-------------------------------------------------------------------
   // turn functionality for game progression
@@ -155,6 +160,7 @@ function init() {
     // determine active player
     let activePlayer = 1;
     turnCount % 2 === 0 ? (activePlayer = 1) : (activePlayer = 2);
+    // current turn will show username of active player
     document.querySelector('.active-player').innerText =
       playerInfo[`${activePlayer - 1}`.username];
 
@@ -203,6 +209,7 @@ function init() {
               boardArr[i][j + 3] == `${activePlayer}`
             ) {
               alert(`${playerInfo[activePlayer - 1].username} wins!`);
+              gameOver();
             }
           }
         }
@@ -211,16 +218,18 @@ function init() {
     checkHorizontal();
 
     function checkVertical() {
-      // console.log("checking vertical");
+      console.log('checking vertical');
       for (let i = 0; i < boardArr.length; i++) {
         for (let j = 0; j < boardArr[i].length; j++) {
-          if (boardArr[i][j] == `${activePlayer}` && boardArr[i] < rows) {
+          if (boardArr[i][j] == `${activePlayer}`) {
             if (
               boardArr[i - 1][j] == `${activePlayer}` &&
               boardArr[i - 2][j] == `${activePlayer}` &&
               boardArr[i - 3][j] == `${activePlayer}`
             ) {
-              alert(`${playerInfo[activePlayer - 1].username} wins!`);
+              // alert(`${playerInfo[activePlayer - 1].username} wins!`);
+              console.log('vert win');
+              gameOver();
             }
           }
         }
@@ -271,5 +280,38 @@ function init() {
 
     // update active player display
     displayActivePlayer.innerText = playerInfo[`${activePlayer - 1}`].username;
+  }
+
+  // when mouse enters column, highlight that column by scaling up and adding gradient
+  function mouseEnterColumn() {
+    this.style.transform = 'scale(1.1)';
+    this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+  }
+  // when mouse leaves previous column, revert styling to default
+  function mouseExitColumn() {
+    this.style.transform = 'none';
+    this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+  }
+
+  function clearEventListeners() {
+    // remove event listeners to prevent players from moving after win
+    gameColumns.forEach((column) => {
+      column.removeEventListener('click', turn);
+      column.removeEventListener('mouseenter', mouseEnterColumn);
+      column.removeEventListener('mouseleave', mouseExitColumn);
+    });
+  }
+
+  function removeColumnStyles() {
+    // remove styles or the last column to invoke turn() will be stuck with styling
+    gameColumns.forEach((column) => {
+      column.style.transform = 'none';
+      column.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+    });
+  }
+
+  function gameOver() {
+    removeColumnStyles();
+    clearEventListeners();
   }
 }
