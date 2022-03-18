@@ -23,15 +23,18 @@ let playerInfo = [
 // =========Selectors======
 // ========================
 
-// ----modal----
+// ----init modal----
 const modal = document.querySelector("#modal");
 const modalContent = document.querySelector("#modal-content");
 const modalHeader = document.querySelector(".modal-header");
 const modalText = document.querySelector(".modal-text");
 
+// ---- rules modal-----
+const rulesModal = document.querySelector("#rules-modal");
+
 // -----buttons----
 const btnsGetGrid = document.querySelectorAll(".btn-grid-choice"); // NODE LIST
-const btnRules = document.querySelector(".btn-rules");
+const btnsRules = document.querySelectorAll(".btn-rules");
 const btnStartGame = document.querySelector(".btn-start-game");
 const btnResetGame = document.querySelector(".btn-reset-game");
 const btnPlayAgain = document.querySelector(".btn-play-again");
@@ -106,6 +109,7 @@ function init() {
 
   btnResetGame.addEventListener("click", resetGame);
   btnPlayAgain.addEventListener("click", resetGame);
+  btnsRules.forEach((btn) => btn.addEventListener("click", toggleRulesModal));
 
   // get gameboard
   let rows, columns;
@@ -401,4 +405,16 @@ function init() {
     resultsBanner.classList.remove("hidden");
     resultsBanner.classList.add("visible");
   }
+
+  function toggleRulesModal() {
+    if (rulesModal.classList.contains("visible")) {
+      rulesModal.classList.add("hidden");
+      rulesModal.classList.remove("visible");
+    } else {
+      rulesModal.classList.add("visible");
+      rulesModal.classList.remove("hidden");
+    }
+  }
 }
+
+console.log(rulesModal);
