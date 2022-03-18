@@ -315,7 +315,7 @@ function init() {
     // reset turns and active player
     activePlayer = 1;
     displayActivePlayer.innerText = playerInfo[0].username;
-    turnCount = 0;
+    turnCount = 1;
 
     // remove "occupied" class from every cell and reset color
     cells.forEach((cell) => {
