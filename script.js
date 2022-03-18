@@ -359,24 +359,17 @@ function init() {
   function gameWon() {
     removeColumnStyles();
     clearEventListeners();
-    toggleResultsBanner();
+    showResultsBanner();
   }
 
   function gameDraw() {
-    console.log("gamedraw is running");
-    console.log(resultsBanner);
     removeColumnStyles();
     clearEventListeners();
-    toggleResultsBanner();
+    showResultsBanner();
   }
 
-  function toggleResultsBanner() {
-    if (resultsBanner.classList.contains("hidden")) {
-      resultsBanner.classList.remove("hidden");
-      resultsBanner.classList.add("visible");
-    } else {
-      resultsBanner.classList.add("hidden");
-      resultsBanner.classList.remove("visible");
-    }
+  function showResultsBanner() {
+    resultsBanner.classList.remove("hidden");
+    resultsBanner.classList.add("visible");
   }
 }
