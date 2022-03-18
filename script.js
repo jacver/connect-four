@@ -238,7 +238,6 @@ function init() {
               boardArr[i][j + 2] == `${activePlayer}` &&
               boardArr[i][j + 3] == `${activePlayer}`
             ) {
-              alert(`${playerInfo[activePlayer - 1].username} wins!`);
               gameWon();
             }
           }
@@ -257,8 +256,6 @@ function init() {
               boardArr[i - 2][j] == `${activePlayer}` &&
               boardArr[i - 3][j] == `${activePlayer}`
             ) {
-              // alert(`${playerInfo[activePlayer - 1].username} wins!`);
-              console.log("vert win");
               gameWon();
             }
           }
@@ -279,7 +276,6 @@ function init() {
               boardArr[i][j] == boardArr[i - 2][j + 2] &&
               boardArr[i][j] == boardArr[i - 3][j + 3]
             ) {
-              alert("player wins diagonal up and right");
               gameWon();
             }
             if (
@@ -357,14 +353,18 @@ function init() {
   }
 
   function gameWon() {
+    // bring activePlayer into scope
+    turnCount % 2 === 0 ? (activePlayer = 1) : (activePlayer = 2);
     removeColumnStyles();
     clearEventListeners();
+    resultsHeader.innerText = `${playerInfo[activePlayer - 1].username} wins!`;
     showResultsBanner();
   }
 
   function gameDraw() {
     removeColumnStyles();
     clearEventListeners();
+    resultsHeader.innerText = "Draw!";
     showResultsBanner();
   }
 
