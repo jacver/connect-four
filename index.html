@@ -9,11 +9,10 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Connect 4</h1>
     <main>
       <section id="modal" class="visible">
         <div role="modal container" id="modal-content">
-          <h2 class="modal-header"></h2>
+          <h2 class="modal-header">Username and Team Color</h2>
           <div
             role="player customization options"
             id="player-settings-container"
@@ -24,15 +23,28 @@
               class="player-input"
             >
               <form action="">
-                <label>Player 1:</label>
+                <label>Player 1</label>
+                <br />
                 <input
-                  class="input-username1"
+                  class="input-username1 input-username"
                   value=""
                   type="text"
-                  placeholder="Input Username"
+                  placeholder="Username"
                 />
-                <input class="color-player1" type="color" value="#FFFF00" />
-                <input class="btn-player1" type="button" value="Submit" />
+                <br />
+                <input
+                  class="color-player1 color-player"
+                  type="color"
+                  value="#FFFF00"
+                />
+                <br />
+                <div class="button-container">
+                  <input
+                    class="btn-player1 btn-player"
+                    type="button"
+                    value="Lock in"
+                  />
+                </div>
               </form>
             </div>
             <div
@@ -41,19 +53,30 @@
               class="player-input"
             >
               <form action="">
-                <label>Player 2:</label>
+                <label>Player 2</label>
+                <br />
                 <input
-                  class="input-username2"
+                  class="input-username2 input-username"
                   value=""
                   type="text"
-                  placeholder="Input Username"
+                  placeholder="Username"
                 />
-                <input class="color-player2" type="color" value="#ff0000" />
-                <input class="btn-player2" type="button" value="Submit" />
+                <br />
+                <input
+                  class="color-player2 color-player"
+                  type="color"
+                  value="#ff0000"
+                />
+                <br />
+                <input
+                  class="btn-player2 btn-player"
+                  type="button"
+                  value="Lock in"
+                />
               </form>
             </div>
           </div>
-          <h2>Choose a desired grid size:</h2>
+          <h2 class="modal-header">Board Size</h2>
           <div role="gameboard size determination" class="grid-size-container">
             <div role="gameboard size row" class="grid-size-row">
               <button role="select gameboard size" class="btn-grid-choice">
