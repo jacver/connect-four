@@ -6,16 +6,14 @@ let playerInfo = [
   {
     player: 1,
     username: 'Player 1',
-    color: '#FFB401',
+    color: '#B70B0D',
     wins: 0,
-    active: true,
   },
   {
     player: 2,
     username: 'Player 2',
-    color: '#B70B0D',
+    color: '#FFB401',
     wins: 0,
-    active: false,
   },
 ];
 
@@ -162,7 +160,7 @@ function init() {
   modal.classList.add('hidden');
 
   // set starting turn counter
-  let turnCount = 0;
+  let turnCount = 1;
 
   // Select each column and give event listener to run game turn
   let gameColumns = document.querySelectorAll('.column');
@@ -173,12 +171,15 @@ function init() {
     column.addEventListener('mouseleave', mouseExitColumn);
   });
 
-  //-------------------------------------------------------------------
+  // ======================================
+  // =============Turn=====================
+  // ======================================
+
   // turn functionality for game progression
   function turn() {
     // determine active player
     let activePlayer = 1;
-    turnCount % 2 === 0 ? (activePlayer = 1) : (activePlayer = 2);
+    turnCount % 2 !== 0 ? (activePlayer = 1) : (activePlayer = 2);
     // current turn will show username of active player
     document.querySelector('.active-player').innerText =
       playerInfo[`${activePlayer - 1}`.username];
@@ -240,7 +241,6 @@ function init() {
     checkDraw();
 
     function checkHorizontal() {
-      // console.log("checking horizontal");
       for (let i = 0; i < boardArr.length; i++) {
         for (let j = 0; j < boardArr[i].length; j++) {
           if (boardArr[i][j] == `${activePlayer}`) {
@@ -258,7 +258,6 @@ function init() {
     checkHorizontal();
 
     function checkVertical() {
-      // console.log("checking vertical");
       for (let i = 0; i < boardArr.length; i++) {
         for (let j = 0; j < boardArr[i].length; j++) {
           if (boardArr[i][j] == `${activePlayer}` && i >= 3) {
@@ -277,7 +276,6 @@ function init() {
 
     function checkDiagonal() {
       // check down right
-      // console.log("checking up + right");
       for (let i = 0; i < boardArr.length; i++) {
         for (let j = 0; j < boardArr[i].length; j++) {
           if (boardArr[i][j] == `${activePlayer}` && i >= 3) {
@@ -387,6 +385,8 @@ function init() {
     playerInfo[activePlayer - 1].wins++;
     displayScoreP1.innerText = playerInfo[0].wins;
     displayScoreP2.innerText = playerInfo[1].wins;
+
+    console.log(activePlayer);
 
     // remove column events
     removeColumnStyles();
