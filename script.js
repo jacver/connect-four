@@ -81,6 +81,7 @@ document.querySelector('.btn-player2').onclick = function () {
   // pull username and color values from landing page modal
   let username = document.querySelector('.input-username2').value;
   let color = document.querySelector('.color-player2').value;
+  this.style.backgroundColor = 'rgb()';
 
   // if no username is input, default of Player 2 will remain, otherwise update object
   if (username) {
@@ -418,5 +419,3 @@ function init() {
     }
   }
 }
-
-console.log(rulesModal);
