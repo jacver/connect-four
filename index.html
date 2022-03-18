@@ -106,8 +106,9 @@
         </div>
       </section>
       <section role="game info bar" id="info-bar">
-        <div>Current Turn: <span class="active-player"></span></div>
+        <div>Turn: <span class="active-player"></span></div>
         <div role="scoreboard" id="score-container">
+          <p>Wins:</p>
           <div role="player 1 score">
             <span class="display-username1">Player 1</span>:
             <span class="display-score-1">0</span>
@@ -118,8 +119,10 @@
             <span class="display-score-2">0</span>
           </div>
         </div>
-        <button class="btn-rules">Rules</button>
-        <button class="btn-reset-game">Reset Game</button>
+        <div class="info-bar-button-container">
+          <button class="btn-rules">Rules</button>
+          <button class="btn-reset-game">Reset Game</button>
+        </div>
       </section>
       <section id="results-banner" class="hidden">
         <div id="results-content">
