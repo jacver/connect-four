@@ -1,3 +1,12 @@
+@font-face {
+  font-family: ticketToTheStar;
+  src: url(fonts/Ticket\ to\ the\ Star.ttf);
+}
+
+* {
+  font-family: ticketToTheStar;
+}
+
 body {
   width: 80vw;
   margin: 0 auto;
