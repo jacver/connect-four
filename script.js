@@ -34,6 +34,11 @@ const btnsGetGrid = document.querySelectorAll(".btn-grid-choice"); // NODE LIST
 const btnRules = document.querySelector(".btn-rules");
 const btnStartGame = document.querySelector(".btn-start-game");
 const btnResetGame = document.querySelector(".btn-reset-game");
+const btnPlayAgain = document.querySelector(".btn-play-again");
+
+// Info Bar
+let displayScoreP1 = document.querySelector(".display-score-1");
+let displayScoreP2 = document.querySelector(".display-score-2");
 
 // ----Game Board------
 const gridContainer = document.querySelector("#grid-container");
@@ -100,6 +105,7 @@ function init() {
   displayActivePlayer.innerText = playerInfo[0].username;
 
   btnResetGame.addEventListener("click", resetGame);
+  btnPlayAgain.addEventListener("click", resetGame);
 
   // get gameboard
   let rows, columns;
@@ -312,6 +318,12 @@ function init() {
       cell.style.backgroundColor = "white";
     });
 
+    if (resultsBanner.classList.contains("visible")) {
+      resultsBanner.classList.remove("visible");
+      resultsBanner.classList.add("hidden");
+    }
+    reattachEventListeners();
+
     // regenerate boardArr with x's
     boardArr = [];
 
@@ -344,6 +356,15 @@ function init() {
     });
   }
 
+  function reattachEventListeners() {
+    // remove event listeners to prevent players from moving after win
+    gameColumns.forEach((column) => {
+      column.addEventListener("click", turn);
+      column.addEventListener("mouseenter", mouseEnterColumn);
+      column.addEventListener("mouseleave", mouseExitColumn);
+    });
+  }
+
   function removeColumnStyles() {
     // remove styles or the last column to invoke turn() will be stuck with styling
     gameColumns.forEach((column) => {
@@ -355,8 +376,16 @@ function init() {
   function gameWon() {
     // bring activePlayer into scope
     turnCount % 2 === 0 ? (activePlayer = 1) : (activePlayer = 2);
+    // update playerInfo wins and display wins
+    playerInfo[activePlayer - 1].wins++;
+    displayScoreP1.innerText = playerInfo[0].wins;
+    displayScoreP2.innerText = playerInfo[1].wins;
+
+    // remove column events
     removeColumnStyles();
     clearEventListeners();
+
+    // style and show results banner
     resultsHeader.innerText = `${playerInfo[activePlayer - 1].username} wins!`;
     showResultsBanner();
   }
