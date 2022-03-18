@@ -166,11 +166,11 @@ function init() {
 
     // update html board and JS array
     // This function will start at the column button, then move up through the siblings (cells) and determine if 1) they are not the original button and 2) that they don't contain class occupied. If the cell is free, it will stop. If not, it will move up 1
-    let findFirstCell = function (elem) {
-      let sibling = elem.lastChild;
+    let findFirstCell = function (column) {
+      let sibling = column.lastChild;
 
       while (sibling.previousSibling || sibling.classList.contains("row0")) {
-        if (sibling !== elem && !sibling.classList.contains("occupied")) {
+        if (sibling !== column && !sibling.classList.contains("occupied")) {
           sibling.classList.add("occupied");
           sibling.style.backgroundColor =
             playerInfo[`${activePlayer - 1}`].color;
@@ -212,10 +212,9 @@ function init() {
     function checkDraw() {
       for (i = 0; i < boardArr.length; i++) {
         for (let j = 0; j < boardArr[i].length; j++) {
-          if (boardArr[i][j] == "x") {
-            console.log("still blanks spaces");
-          } else if (boardArr[i][j] !== "x") {
-            ("not x");
+          if (!boardArr[0].includes("x")) {
+            // TODO: DRAW MESSAGE
+            gameDraw();
           }
         }
       }
@@ -343,6 +342,7 @@ function init() {
   }
 
   function gameDraw() {
+    console.log("draw game");
     removeColumnStyles();
     clearEventListeners();
   }
