@@ -5,6 +5,15 @@ span {
 body {
   width: 80vw;
   margin: 0 auto;
+  background-color: rgb(255, 242, 189);
+  color: black;
+}
+
+button {
+  background-color: rgb(218, 127, 125);
+  color: black;
+  border-radius: 10%;
+  padding: 5px;
 }
 
 button:hover {
@@ -31,7 +40,7 @@ button:hover {
 }
 
 #modal-content {
-  background-color: white;
+  background-color: rgb(255, 242, 189);
   margin: 25vh auto;
   padding: 2.5%;
   border: 1px solid black;
@@ -40,7 +49,6 @@ button:hover {
 }
 
 #player-settings-container {
-  /* background-color: red; */
   padding: 5px;
   display: flex;
   gap: 20%;
@@ -56,7 +64,20 @@ button:hover {
 .btn-player,
 .color-player,
 .input-username {
+  cursor: pointer;
   margin-top: 10px;
+  padding: 5px;
+  background-color: rgb(235, 181, 138);
+  color: black;
+  border-radius: 10%;
+}
+
+.input-username {
+  border-radius: 50px;
+}
+
+.btn-player {
+  background-color: rgb(218, 127, 125);
 }
 
 .color-player {
@@ -92,11 +113,12 @@ button:hover {
 }
 
 #info-bar {
-  min-width: 80vw;
+  background-color: rgb(235, 181, 138);
   display: flex;
-  justify-content: space-between;
-  background-color: bisque;
+  justify-content: space-evenly;
   padding: 0.5rem;
+  font-size: 1.2rem;
+  border-radius: 50px;
 }
 
 #grid-container {
@@ -104,7 +126,6 @@ button:hover {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: blue;
   min-width: 80vw;
   min-height: 50vh;
   padding: 0.5rem;
@@ -115,8 +136,7 @@ button:hover {
   height: 25px;
   margin: 0.25rem;
   border-radius: 50%;
-  background-color: white;
-  border: 3px black solid;
+  border: 3px rgb(119, 110, 153) solid;
 }
 
 #results-banner {
@@ -143,18 +163,16 @@ button:hover {
 
 #rules-modal {
   position: fixed;
-  top: 30%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: black;
+  background-color: rgb(244, 215, 151);
   z-index: 10;
   width: 50%;
-  height: 30%;
   text-align: center;
-  color: white;
   padding: 20px;
 }
 
-.btn-close-rules {
-  float: right;
+.btn-rules {
+  text-align: right;
 }
