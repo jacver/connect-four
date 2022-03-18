@@ -243,9 +243,7 @@ function init() {
     function checkVertical() {
       // console.log("checking vertical");
       for (let i = 0; i < boardArr.length; i++) {
-        // console.log("running 1");
         for (let j = 0; j < boardArr[i].length; j++) {
-          // console.log("running 2");
           if (boardArr[i][j] == `${activePlayer}` && i >= 3) {
             if (
               boardArr[i - 1][j] == `${activePlayer}` &&
@@ -262,46 +260,35 @@ function init() {
     }
     checkVertical();
 
-    // function checkDiagonal() {
-    //   // check down right
-    //   console.log("checking up + right");
-    //   for (let i = 0; i < boardArr.length; i++) {
-    //     for (let j = 0; j < boardArr[i].length; j++) {
-    //       if (i - 1 < 0) {
-    //         break;
-    //       }
-    //       if (j + 1 > boardArr[i].length) {
-    //         break;
-    //       }
-    //       if (boardArr[i][j] == `${activePlayer}`) {
-    //         if (
-    //           boardArr[i - 1][j + 1] == `${activePlayer}` &&
-    //           boardArr[i - 2][j + 1] == `${activePlayer}` &&
-    //           boardArr[i - 3][j + 1] == `${activePlayer}`
-    //         ) {
-    //           alert("diagonal win!");
-    //           console.log("diagonal win (up -> right)");
-    //         }
-    //       }
-    //     }
-    //   }
-    // check down left
-    // console.log("checking up + left");
-    // for (let i = 0; i < boardArr.length; i++) {
-    //   for (let j = 0; j < boardArr[i].length; j++) {
-    //     if (boardArr[i][j] == `${activePlayer}`) {
-    //       if (
-    //         boardArr[i + 1][j - 1] == `${activePlayer}` &&
-    //         boardArr[i + 2][j - 1] == `${activePlayer}` &&
-    //         boardArr[i + 3][j - 1] == `${activePlayer}`
-    //       ) {
-    //         console.log("diagonal win (up-> right)");
-    //       }
-    //     }
-    //   }
-    // }
-    // }
-    // checkDiagonal();
+    function checkDiagonal() {
+      // check down right
+      // console.log("checking up + right");
+      for (let i = 0; i < boardArr.length; i++) {
+        for (let j = 0; j < boardArr[i].length; j++) {
+          if (boardArr[i][j] == `${activePlayer}` && i >= 3) {
+            if (
+              // checking up and right
+              boardArr[i][j] == boardArr[i - 1][j + 1] &&
+              boardArr[i][j] == boardArr[i - 2][j + 2] &&
+              boardArr[i][j] == boardArr[i - 3][j + 3]
+            ) {
+              alert("player wins diagonal up and right");
+              gameWon();
+            }
+            if (
+              // checking up and left
+              boardArr[i][j] == boardArr[i - 1][j - 1] &&
+              boardArr[i][j] == boardArr[i - 2][j - 2] &&
+              boardArr[i][j] == boardArr[i - 3][j - 3]
+            ) {
+              alert("player wins diagonal up and left");
+              gameWon();
+            }
+          }
+        }
+      }
+    }
+    checkDiagonal();
 
     // add to turn counter
     turnCount++;
