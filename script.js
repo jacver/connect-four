@@ -38,6 +38,10 @@ const btnResetGame = document.querySelector(".btn-reset-game");
 // ----Game Board------
 const gridContainer = document.querySelector("#grid-container");
 
+// ----Results Banner----
+const resultsBanner = document.querySelector("#results-banner");
+const resultsHeader = document.querySelector(".results-header");
+
 // ==========================================
 // ======Getting PLayer 1 Input==============
 // ==========================================
@@ -95,6 +99,8 @@ function init() {
   const displayActivePlayer = document.querySelector(".active-player");
   displayActivePlayer.innerText = playerInfo[0].username;
 
+  btnResetGame.addEventListener("click", resetGame);
+
   // get gameboard
   let rows, columns;
   // break up the button text into rows and columns
@@ -125,6 +131,8 @@ function init() {
       // rowArr.push(" ");
     }
   }
+
+  let cells = document.querySelectorAll(".cell");
 
   // Empty javascript board array
   let boardArr = [];
@@ -213,7 +221,6 @@ function init() {
       for (i = 0; i < boardArr.length; i++) {
         for (let j = 0; j < boardArr[i].length; j++) {
           if (!boardArr[0].includes("x")) {
-            // TODO: DRAW MESSAGE
             gameDraw();
           }
         }
@@ -297,6 +304,30 @@ function init() {
     displayActivePlayer.innerText = playerInfo[`${activePlayer - 1}`].username;
   }
 
+  function resetGame() {
+    // reset turns and active player
+    activePlayer = 1;
+    displayActivePlayer.innerText = playerInfo[0].username;
+    turnCount = 0;
+
+    // remove "occupied" class from every cell and reset color
+    cells.forEach((cell) => {
+      cell.classList.remove("occupied");
+      cell.style.backgroundColor = "white";
+    });
+
+    // regenerate boardArr with x's
+    boardArr = [];
+
+    for (let i = 0; i < rows; i++) {
+      let rowArr = [];
+      for (let j = 0; j < columns; j++) {
+        rowArr.push("x");
+      }
+      boardArr.push(rowArr);
+    }
+  }
+
   // when mouse enters column, highlight that column by scaling up and adding gradient
   function mouseEnterColumn() {
     this.style.transform = "scale(1.1)";
@@ -328,11 +359,24 @@ function init() {
   function gameWon() {
     removeColumnStyles();
     clearEventListeners();
+    toggleResultsBanner();
   }
 
   function gameDraw() {
-    console.log("draw game");
+    console.log("gamedraw is running");
+    console.log(resultsBanner);
     removeColumnStyles();
     clearEventListeners();
+    toggleResultsBanner();
+  }
+
+  function toggleResultsBanner() {
+    if (resultsBanner.classList.contains("hidden")) {
+      resultsBanner.classList.remove("hidden");
+      resultsBanner.classList.add("visible");
+    } else {
+      resultsBanner.classList.add("hidden");
+      resultsBanner.classList.remove("visible");
+    }
   }
 }
