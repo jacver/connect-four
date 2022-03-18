@@ -293,7 +293,6 @@ function init() {
               boardArr[i][j] == boardArr[i - 2][j - 2] &&
               boardArr[i][j] == boardArr[i - 3][j - 3]
             ) {
-              alert('player wins diagonal up and left');
               gameWon();
             }
           }
@@ -380,13 +379,11 @@ function init() {
 
   function gameWon() {
     // bring activePlayer into scope
-    turnCount % 2 === 0 ? (activePlayer = 1) : (activePlayer = 2);
+    turnCount % 2 !== 0 ? (activePlayer = 1) : (activePlayer = 2);
     // update playerInfo wins and display wins
     playerInfo[activePlayer - 1].wins++;
     displayScoreP1.innerText = playerInfo[0].wins;
     displayScoreP2.innerText = playerInfo[1].wins;
-
-    console.log(activePlayer);
 
     // remove column events
     removeColumnStyles();
