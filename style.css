@@ -74,6 +74,7 @@ button:hover {
 
 .input-username {
   border-radius: 50px;
+  cursor: auto;
 }
 
 .btn-player {
