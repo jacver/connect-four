@@ -243,11 +243,10 @@ function init() {
     function checkVertical() {
       // console.log("checking vertical");
       for (let i = 0; i < boardArr.length; i++) {
+        // console.log("running 1");
         for (let j = 0; j < boardArr[i].length; j++) {
-          if (i - 1 < 0) {
-            break;
-          }
-          if (boardArr[i][j] == `${activePlayer}`) {
+          // console.log("running 2");
+          if (boardArr[i][j] == `${activePlayer}` && i >= 3) {
             if (
               boardArr[i - 1][j] == `${activePlayer}` &&
               boardArr[i - 2][j] == `${activePlayer}` &&
@@ -268,10 +267,13 @@ function init() {
     //   console.log("checking up + right");
     //   for (let i = 0; i < boardArr.length; i++) {
     //     for (let j = 0; j < boardArr[i].length; j++) {
-    //       if (boardArr[i][j] == `${activePlayer}` && i > 3) {
-    //         console.log(`Up 1 right: ${boardArr[i - 1][j + 1]}`);
-    //         console.log(`Up 2 right: ${boardArr[i - 2][j + 2]}`);
-    //         console.log(`Up 3 right: ${boardArr[i - 3][j + 3]}`);
+    //       if (i - 1 < 0) {
+    //         break;
+    //       }
+    //       if (j + 1 > boardArr[i].length) {
+    //         break;
+    //       }
+    //       if (boardArr[i][j] == `${activePlayer}`) {
     //         if (
     //           boardArr[i - 1][j + 1] == `${activePlayer}` &&
     //           boardArr[i - 2][j + 1] == `${activePlayer}` &&
