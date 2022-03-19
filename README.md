@@ -2,7 +2,7 @@
 
 ## Live Link
 
-[Play here!](-------add url -----------)
+[Play here!](https://jacver.github.io/connect-four/)
 
 ## Project Description
 
