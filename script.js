@@ -301,7 +301,7 @@ function init() {
     turnCount++;
 
     // update active player display
-    displayActivePlayer.innerText = playerInfo[`${activePlayer - 1}`].username;
+    displayActivePlayer.innerText = playerInfo[`${activePlayer}`].username;
   }
 
   function resetGame() {
