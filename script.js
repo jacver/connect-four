@@ -175,8 +175,8 @@ function init() {
   // turn functionality for game progression
   function turn() {
     // determine active player
-    let activePlayer = 1;
-    turnCount % 2 !== 0 ? (activePlayer = 1) : (activePlayer = 2);
+    let activePlayer = 0;
+    turnCount % 2 !== 0 ? (activePlayer = 0) : (activePlayer = 1);
     // current turn will show username of active player
     document.querySelector(".active-player").innerText =
       playerInfo[`${activePlayer - 1}`.username];
@@ -189,8 +189,7 @@ function init() {
       while (sibling.previousSibling || sibling.classList.contains("row0")) {
         if (sibling !== column && !sibling.classList.contains("occupied")) {
           sibling.classList.add("occupied");
-          sibling.style.backgroundColor =
-            playerInfo[`${activePlayer - 1}`].color;
+          sibling.style.backgroundColor = playerInfo[`${activePlayer}`].color;
 
           // seperating the number from each row/column class name to get XY coords
           let x = parseInt(sibling.parentNode.classList[0].split("column")[1]);
@@ -300,13 +299,17 @@ function init() {
     // add to turn counter
     turnCount++;
 
-    // update active player display
-    displayActivePlayer.innerText = playerInfo[`${activePlayer}`].username;
+    // MUST REDETERMINE ACTIVE PLAYER AFTER TURN COUNT INCREMENTS OR YOU WILL GET A 1 OFF ERROR ON DISPLAY NAME
+    // determine active player
+    turnCount % 2 !== 0 ? (activePlayer = 0) : (activePlayer = 1);
+    // // update active player display
+    displayActivePlayer.innerText =
+      playerInfo[Number(`${activePlayer}`)].username;
   }
 
   function resetGame() {
     // reset turns and active player
-    activePlayer = 1;
+    activePlayer = 0;
     displayActivePlayer.innerText = playerInfo[0].username;
     turnCount = 1;
 
